@@ -3,7 +3,7 @@
     <form action="<?=webRoot?>" method="post">
         <div class="row justify-content-end">
             <div class="col-auto ml-3">
-                <input type="text" class="form-control" name="nomType" aria-describedby="helpId" placeholder="Nom Type" />
+                <input type="text" class="form-control" name="nomCategorie" aria-describedby="helpId" placeholder="Nom Categorie" />
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-dark " name="action" value="FormType" >
@@ -11,8 +11,8 @@
                 </button>
             </div>
         </div>
-        <input type="hidden" name="action" value="FormType">
-        <input type="hidden" name="controller" value="type">
+        <input type="hidden" name="action" value="FormCategorie">
+        <input type="hidden" name="controller" value="categorie">
     </form>
 </div>
 
@@ -25,10 +25,10 @@
     </thead>
     <tbody>
 
-        <?php foreach ($types as $value) : ?>
+        <?php foreach ($categories as $value) : ?>
             <tr scope="row">
                 <th><?= $value["id"] ?></th>
-                <th><?= $value["nomType"] ?></th>
+                <th><?= $value["nomCategorie"] ?></th>
             </tr>
         <?php endforeach ?>
 

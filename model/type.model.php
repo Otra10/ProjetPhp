@@ -1,5 +1,6 @@
 <?php
-function findAllType()
+class TypeModel{
+function findAll()
 {
     $dsn = "mysql:host=127.0.0.1;dbname=cours_php_ism";
     $username = 'root';
@@ -17,7 +18,7 @@ function findAllType()
         echo "Erreur de connexion :" . $e->getMessage();
     }
 }
-function saveAllType(){
+function saveAll(){
     $dsn = "mysql:host=127.0.0.1;dbname=cours_php_ism";
     $username = 'root';
     $password = "";
@@ -34,4 +35,5 @@ function saveAllType(){
     } catch (PDOException $e) {
         echo "Erreur de connexion :" . $e->getMessage();
     }
+}
 }

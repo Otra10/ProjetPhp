@@ -1,35 +1,62 @@
 <?php 
-    if(isset($_REQUEST["action"])){
-        if($_REQUEST["action"]=="listeArticle"){
-            listerArticle();
-        }else if($_REQUEST["action"]=="formArticle"){
-            FormArticle();
-        }else if($_REQUEST["action"]=="addArticle"){
-            AjoutArticle();
-            header("location:".webRoot."/?controller=article&action=listeArticle");
-        }
-    }else{
-        listerArticle();
-    }
-    function FormArticle(){
-        require_once("../model/article.model.php");
-        require_once("../model/type.model.php");
-        require_once("../model/categorie.model.php");
-        $categories=findAllCategorie();
-        $types=findAllType();
-        $articles=findAllArticle();
-        // require_once("../views/liste.html.php");
-        require_once("../views/articles/form.html.php");
+require_once("../model/article.model.php");
+require_once("../model/type.model.php");
+require_once("../model/categorie.model.php");
+require_once("controller.php"); 
+
+class ArticleController extends Controller{
+    private $articleModel;
+    private $typeModel;
+    private $categorieModel;
+
+    public function __construct() {
+        $this->articleModel = new ArticleModel();
+        $this->typeModel = new TypeModel();
+        $this->categorieModel = new CategorieModel();
+        $this->load();
     }
 
-    function listerArticle(){
-        require_once("../model/article.model.php");
-        $articles=findAllArticle();
-        // require_once("../views/liste.html.php");
-        require_once("../views/articles/liste.html.php");
+    public function load() {
+        if (isset($_REQUEST["action"])) {
+            if ($_REQUEST["action"] == "listeArticle") {
+                $this->listerArticle();
+            } elseif ($_REQUEST["action"] == "formArticle") {
+                $this->FormArticle();
+            } elseif ($_REQUEST["action"] == "addArticle") {
+                $this->AjoutArticle();
+                header("Location: " . webRoot . "/?controller=article&action=listeArticle");
+            }
+        } else {
+            $this->listerArticle();
+        }
     }
-    function AjoutArticle(){
-        require_once("../model/article.model.php");
-        saveAllArticle();
+
+    public function FormArticle() {
+        $categories = $this->categorieModel->findAll();
+        $types = $this->typeModel->findAll();
+        $articles = $this->articleModel->findAll();
+        $this->renderView("articles/form",[
+            "articles"=>$articles,
+            "categories"=>$categories,
+            "types"=>$types
+    
+    ]);
     }
+
+    public function listerArticle() {
+        $categories = $this->categorieModel->findAll();
+        $types = $this->typeModel->findAll();
+        $articles = $this->articleModel->findAll();
+        $this->renderView("articles/liste",[
+            "articles"=>$articles,
+            "categories"=>$categories,
+            "types"=>$types
+    
+    ]);
+    }
+
+    public function AjoutArticle() {
+        $this->articleModel->saveAll();
+    }
+}
 ?>

@@ -27,7 +27,7 @@
                     <a class="nav-link  text-white" href="<?=webRoot?>/?controller=article&action=listeArticle">Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  text-white" href="#">Catégories</a>
+                    <a class="nav-link  text-white" href="<?=webRoot?>/?controller=categorie&action=listeCategorie">Catégories</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  text-white" href="<?=webRoot?>/?controller=type&action=listeType">Types</a>
