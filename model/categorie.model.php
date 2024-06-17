@@ -1,38 +1,23 @@
 <?php
-class CategorieModel
+require_once("Model.php");
+class CategorieModel extends Model
 {
+    public function __construct()
+        {
+            $this->ouvrirConnexion();
+        }
     public function findAll()
     {
-        $dsn = "mysql:host=127.0.0.1;dbname=cours_php_ism";
-        $username = 'root';
-        $password = "";
-
-
-        try {
-            $dbh = new PDO($dsn, $username, $password);
-            $sql = "select * from categorie";
-            $stm = $dbh->query($sql);
-            $row = $stm->fetchAll(PDO::FETCH_ASSOC);
-            // var_dump($row[0]["nomType"]);
-            return $row;
-        } catch (PDOException $e) {
-            echo "Erreur de connexion :" . $e->getMessage();
-        }
+        $sql = "select * from categorie";
+        return $this->findData($sql);
     }
     function saveAll(){
-        $dsn = "mysql:host=127.0.0.1;dbname=cours_php_ism";
-        $username = 'root';
-        $password = "";
-    
         unset($_POST["action"]);
         extract($_POST); 
         try {
-            $dbh = new PDO($dsn, $username, $password);
+            $this->pdo  = new PDO($dsn, $username, $password);
             $sql="INSERT INTO `categorie` (`nomCategorie`) VALUES ('$nomCategorie')";
-            $stm=$dbh->exec($sql);
-            // $row=$stm->fetchAll(PDO::FETCH_ASSOC);
-            // var_dump($row[0]["nomType"]);
-            // return $row;
+            $stm=$pdo->exec($sql);
         } catch (PDOException $e) {
             echo "Erreur de connexion :" . $e->getMessage();
         }

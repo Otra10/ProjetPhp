@@ -15,11 +15,11 @@
         }
         }
     
-    public function findData($stm,$sql)
+    public function findData($sql)
     {
         try {
             $sql = $sql;
-            $stm = $stm;
+            $stm = $this->pdo->query($sql);
             $row = $stm->fetchAll(PDO::FETCH_ASSOC);
             // var_dump($row);
             return $row;
