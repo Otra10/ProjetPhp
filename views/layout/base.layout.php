@@ -1,71 +1,48 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tableau Bootstrap</title>
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <title>Votre Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <style>
-      .nav-link:hover {
-        color: #ddd !important; /* Changer la couleur au survol */
-        text-decoration: underline !important; /* Souligner le texte au survol */
-      }
+        .nav-link:hover {
+            color: #ddd !important;
+            text-decoration: underline !important;
+        }
     </style>
-  </head>
-  <body>
-    <div class="container-fluid">
-      <div class="row back">
-        <div class="col-md-3 col-lg-2 bg-dark p-4">
-          <div class="text-center mb-4">
-            <p style="color: white">Logo de l'entreprise</p>
-          </div>
-          <ul class="nav flex-column min-vh-100">
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Accueil</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link text-white"
-                href="<?=webRoot?>/?controller=article&action=listeArticle"
-                >Articles</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link text-white"
-                href="<?=webRoot?>/?controller=categorie&action=listeCategorie"
-                >Catégories</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link text-white"
-                href="<?=webRoot?>/?controller=type&action=listeType"
-                >Types</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Contact</a>
-            </li>
-          </ul>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto">
+        <div class="flex flex-col lg:flex-row">
+            <div class="w-full lg:w-1/4 xl:w-1/5 bg-gray-800 p-4">
+                <div class="text-center mb-4">
+                    <p class="text-white">Logo de l'entreprise</p>
+                </div>
+                <ul class="nav flex-col min-h-screen">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white block py-2 px-4 hover:bg-gray-700" href="#">Accueil</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=article&action=listeArticle">Articles</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=categorie&action=listeCategorie">Catégories</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=type&action=listeType">Types</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white block py-2 px-4 hover:bg-gray-700" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-full lg:w-3/4 xl:w-4/5 mt-5 lg:mt-0 lg:ml-4">
+                <div>
+                    <?php echo $contentView; ?>
+                </div>
+            </div>
         </div>
-
-        <!-- Contenu principal à droite -->
-        <div class="col-md-9 col-lg-10 mt-5">
-          <div>
-            <?php 
-              echo $contentView;
-            ?>
-          </div>
-        </div>
-      </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </body>
+</body>
 </html>

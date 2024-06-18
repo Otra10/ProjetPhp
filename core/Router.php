@@ -1,22 +1,40 @@
 <?php
-    class  Router{
-        public static function route()
-        {
-            if (isset($_REQUEST["controller"])) {
-                if ($_REQUEST["controller"] == "article") {
-                    require_once("../controllers/article.controller.php");
-                    $controller=new ArticleController();
-                } elseif ($_REQUEST["controller"] == "type") {
-                    require_once("../controllers/type.controller.php");
-                    $controller=new TypeController();
-                } elseif ($_REQUEST["controller"] == "categorie") {
-                    require_once("../controllers/categorie.controller.php");
-                    $controller=new CategireController();
+class Router
+{
+    public static function route()
+    {
+        $controllerName = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : 'ArticleConfection';
+        $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'index';
+        
+    
+        $controllerClass = $controllerName . 'Controller';
+        
+  
+        $controllerFile = "../controllers/" . $controllerClass . ".php";
+        
+        if (file_exists($controllerFile)) {
+            require_once($controllerFile);
+
+            if (class_exists($controllerClass)) {
+                $controller = new $controllerClass();
+
+                if (method_exists($controller, $action)) {
+                    $controller->{$action}();
+                } else {
+                    self::error404("Action '$action' not found in controller '$controllerClass'");
                 }
             } else {
-                $contentView="";
-                require_once("../views/layout/base.layout.php");;
+                self::error404("Controller class '$controllerClass' not found");
             }
+        } else {
+            self::error404("Controller file '$controllerFile' not found");
         }
     }
-?>
+
+    public static function error404($message)
+    {
+        http_response_code(404);
+        echo "<h1>404 - Not Found</h1>";
+        echo "<p>$message</p>";
+    }
+}
