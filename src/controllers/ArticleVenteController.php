@@ -5,11 +5,14 @@ use App\Core\Controller;
 use App\Model\ArticleConfection;
 use App\Model\ArticleVente;
 
-class ArticleVenteController extends Controller {
-    public function index() {
+class ArticleVenteController extends Controller
+{
+    public function index()
+    {
         $model = new ArticleVente();
         $articles = $model->getAll();
-        $this->renderView("",["articles"=>$articles]);
+
+        $this->renderView('', ['articles' => $articles]);
     }
 
     public function create() {
@@ -27,11 +30,13 @@ class ArticleVenteController extends Controller {
         } else {
             $model = new ArticleConfection();
             $articles = $model->getAll();
-            $this->renderView("",["articles"=>$articles]);
+
+            $this->renderView('', ['articles' => $articles]);
         }
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $model = new ArticleVente();
         $article = $model->getById($id);
 
@@ -48,13 +53,16 @@ class ArticleVenteController extends Controller {
         } else {
             $model = new ArticleConfection();
             $articles = $model->getAll();
-            $this->renderView("",["articles"=>$articles]);
+
+            $this->renderView('', ['articles' => $articles]);
         }
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $model = new ArticleVente();
         $model->delete($id);
+
         header('Location: /articles_vente');
     }
 }

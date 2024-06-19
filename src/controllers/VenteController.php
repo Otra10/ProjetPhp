@@ -1,17 +1,21 @@
-<?php 
+<?php
+
 namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Model\Vente;
 
-class VenteController extends Controller{
-    public function index() {
+class VenteController extends Controller
+{
+    public function index()
+    {
         $model = new Vente();
         $ventes = $model->getAll();
         include 'views/ventes/index.php';
     }
 
-    public function create() {
+    public function create()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $date = $_POST['date'];
             $article_id = $_POST['article_id'];
@@ -30,7 +34,8 @@ class VenteController extends Controller{
         }
     }
 
-    public function filterByDate() {
+    public function filterByDate()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $date = $_POST['date'];
 
@@ -41,7 +46,8 @@ class VenteController extends Controller{
         }
     }
 
-    public function filterByClient() {
+    public function filterByClient()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $client_id = $_POST['client_id'];
 
@@ -52,7 +58,8 @@ class VenteController extends Controller{
         }
     }
 
-    public function filterByArticle() {
+    public function filterByArticle()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $article_id = $_POST['article_id'];
 

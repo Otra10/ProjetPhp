@@ -1,17 +1,21 @@
-<?php 
+<?php
+
 namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Model\Client;
 
-class ClientController extends Controller{
-    public function index() {
+class ClientController extends Controller
+{
+    public function index()
+    {
         $model = new Client();
         $clients = $model->getAll();
         include 'views/clients/index.php';
     }
 
-    public function create() {
+    public function create()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
@@ -29,7 +33,8 @@ class ClientController extends Controller{
         }
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $model = new Client();
         $client = $model->getById($id);
 
@@ -49,7 +54,8 @@ class ClientController extends Controller{
         }
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $model = new Client();
         $model->delete($id);
         header('Location: /clients');

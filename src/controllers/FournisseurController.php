@@ -1,17 +1,21 @@
-<?php 
+<?php
+
 namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Model\Fournisseur;
 
-class FournisseurController extends Controller {
-    public function index() {
+class FournisseurController extends Controller
+{
+    public function index()
+    {
         $model = new Fournisseur();
         $fournisseurs = $model->getAll();
         include 'views/fournisseurs/index.php';
     }
 
-    public function create() {
+    public function create()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
@@ -29,7 +33,8 @@ class FournisseurController extends Controller {
         }
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $model = new Fournisseur();
         $fournisseur = $model->getById($id);
 
@@ -49,7 +54,8 @@ class FournisseurController extends Controller {
         }
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $model = new Fournisseur();
         $model->delete($id);
         header('Location: /fournisseurs');
