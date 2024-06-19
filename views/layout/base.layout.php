@@ -12,35 +12,53 @@
         }
     </style>
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto">
-        <div class="flex flex-col lg:flex-row">
-            <div class="w-full lg:w-1/4 xl:w-1/5 bg-gray-800 p-4">
-                <div class="text-center mb-4">
-                    <p class="text-white">Logo de l'entreprise</p>
-                </div>
-                <ul class="nav flex-col min-h-screen">
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white block py-2 px-4 hover:bg-gray-700" href="#">Accueil</a>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <div class="min-h-screen flex flex-col lg:flex-row">
+        <!-- Sidebar -->
+        <div class="w-full lg:w-1/4 xl:w-1/5 bg-gray-800 text-gray-100">
+            <div class="p-4 text-center">
+                <p class="text-white text-xl font-semibold">Logo de l'entreprise</p>
+            </div>
+            <nav class="flex-grow">
+                <ul class="flex flex-col">
+                    <li class="mb-2">
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="#">Accueil</a>
                     </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=article&action=listeArticle">Articles</a>
+                    <li class="mb-2">
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=ArticleConfection">Articles de Confection</a>
                     </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=categorie&action=listeCategorie">Catégories</a>
+                    <li class="mb-2">
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=ArticleVente">Articles de Vente</a>
                     </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=type&action=listeType">Types</a>
+                    <li class="mb-2">
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=Categorie">Catégories</a>
                     </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white block py-2 px-4 hover:bg-gray-700" href="#">Contact</a>
+                    <li class="mb-2">
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=Approvisionnement">Approvisionnement</a>
+                    </li>
+                    <li class="mb-2">
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=Fournisseur">Fournisseurs</a>
+                    </li>
+                    <li class="mb-2">
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=Client">Clients</a>
+                    </li>
+                    <li class="mb-2">
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=Vente">Ventes</a>
+                    </li>
+                    <li class="mb-2">
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?=webRoot?>/?controller=Type">Types</a>
+                    </li>
+                    <li class="mb-2">
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="#">Contact</a>
                     </li>
                 </ul>
-            </div>
-            <div class="w-full lg:w-3/4 xl:w-4/5 mt-5 lg:mt-0 lg:ml-4">
-                <div>
-                    <?php echo $contentView; ?>
-                </div>
+            </nav>
+        </div>
+
+        <!-- Main content -->
+        <div class="w-full lg:w-3/4 xl:w-4/5 p-6">
+            <div class="bg-white shadow-md rounded p-4">
+                <?php echo $contentView; ?>
             </div>
         </div>
     </div>

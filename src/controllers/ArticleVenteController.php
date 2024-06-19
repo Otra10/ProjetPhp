@@ -12,26 +12,26 @@ class ArticleVenteController extends Controller
         $model = new ArticleVente();
         $articles = $model->getAll();
 
-        $this->renderView('', ['articles' => $articles]);
+        $this->renderView('ArticleVente/liste', ['articles' => $articles]);
     }
 
     public function create() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $libelle = $_POST['libelle'];
-            $prix_vente = $_POST['prix_vente'];
-            $quantite_stock = $_POST['quantite_stock'];
-            $montant_vente = $_POST['montant_vente'];
+            $prix = $_POST['prix'];
+            $qte = $_POST['qte'];
+            $montant = $_POST['montant'];
             $photo = $_POST['photo'];
 
             $model = new ArticleVente();
-            $model->create($libelle, $prix_vente, $quantite_stock, $montant_vente, $photo);
+            $model->create($libelle, $prix, $qte, $montant, $photo);
 
-            header('Location: /articles_vente');
+            header('Location: /ArticleVente/liste');
         } else {
             $model = new ArticleConfection();
             $articles = $model->getAll();
 
-            $this->renderView('', ['articles' => $articles]);
+            $this->renderView('ArticleVente/create', ['articles' => $articles]);
         }
     }
 
@@ -42,19 +42,16 @@ class ArticleVenteController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $libelle = $_POST['libelle'];
-            $prix_vente = $_POST['prix_vente'];
-            $quantite_stock = $_POST['quantite_stock'];
-            $montant_vente = $_POST['montant_vente'];
+            $prix = $_POST['prix'];
+            $qte = $_POST['qte'];
+            $montant = $_POST['montant'];
             $photo = $_POST['photo'];
 
-            $model->update($id, $libelle, $prix_vente, $quantite_stock, $montant_vente, $photo);
+            $model->update($id, $libelle, $prix, $qte, $montant, $photo);
 
-            header('Location: /articles_vente');
+            header('location:'.webRoot.'/?controller=ArticleVente');
         } else {
-            $model = new ArticleConfection();
-            $articles = $model->getAll();
-
-            $this->renderView('', ['articles' => $articles]);
+            $this->renderView('ArticleVente/edit', ['article' => $article]);
         }
     }
 
@@ -63,6 +60,6 @@ class ArticleVenteController extends Controller
         $model = new ArticleVente();
         $model->delete($id);
 
-        header('Location: /articles_vente');
+        header('Location: /articles');
     }
 }

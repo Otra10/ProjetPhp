@@ -15,7 +15,7 @@ class Fournisseur extends Model
     public function create($nom, $prenom, $telephone_portable, $telephone_fixe, $adresse, $photo)
     {
         $sql = "
-            INSERT INTO fournisseurs (nom, prenom, telephone_portable, telephone_fixe, adresse, photo)
+            INSERT INTO fournisseurs (nom, prenom, telephonePortable, telephoneFixe, adresse, photo)
             VALUES (?, ?, ?, ?, ?, ?)
         ";
         $stmt = $this->pdo->prepare($sql);
@@ -39,15 +39,15 @@ class Fournisseur extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, $nom, $prenom, $telephone_portable, $telephone_fixe, $adresse, $photo)
+    public function update($id, $nom, $prenom, $telephonePortable, $telephoneFixe, $adresse, $photo)
     {
         $sql = "
             UPDATE fournisseurs
-            SET nom = ?, prenom = ?, telephone_portable = ?, telephone_fixe = ?, adresse = ?, photo = ?
+            SET nom = ?, prenom = ?, telephonePortable = ?, telephoneFixe = ?, adresse = ?, photo = ?
             WHERE id = ?
         ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$nom, $prenom, $telephone_portable, $telephone_fixe, $adresse, $photo, $id]);
+        $stmt->execute([$nom, $prenom, $telephonePortable, $telephoneFixe, $adresse, $photo, $id]);
     }
 
     public function delete($id)

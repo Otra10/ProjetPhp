@@ -24,13 +24,13 @@
                 <tr>
                     <td><?php echo $client['nom']; ?></td>
                     <td><?php echo $client['prenom']; ?></td>
-                    <td><?php echo $client['telephone_portable']; ?></td>
-                    <td><?php echo $client['observations']; ?></td>
+                    <td><?php echo $client['telephonePortable']; ?></td>
+                    <td><?php echo $client['observation']; ?></td>
                     <td><?php echo $client['adresse']; ?></td>
                     <td><img src="<?php echo $client['photo']; ?>" alt="Photo de <?php echo $client['nom']; ?>" width="50"></td>
                     <td>
-                        <a href="<?=webRoot?>/?controller=Client&action=edit/<?php echo $client['id']; ?>">Modifier</a>
-                        <a href="<?=webRoot?>/?controller=Client&action=delete/<?php echo $client['id']; ?>">Supprimer</a>
+                        <a href="<?=webRoot?>/?controller=Client&action=edit&id=<?php echo $client['id']; ?>">Modifier</a>
+                        <a href="<?=webRoot?>/?controller=Client&action=delete&id=<?php echo $client['id']; ?>">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

@@ -10,14 +10,14 @@
         <label for="libelle">Libellé:</label>
         <input type="text" id="libelle" name="libelle" required>
         <br>
-        <label for="prix_vente">Prix Vente:</label>
-        <input type="number" id="prix_vente" name="prix_vente" step="0.01" required>
+        <label for="prix">Prix Vente:</label>
+        <input type="number" id="prix" name="prix" step="0.01" required>
         <br>
-        <label for="quantite_stock">Quantité Stock:</label>
-        <input type="number" id="quantite_stock" name="quantite_stock" required>
+        <label for="qte">Quantité Stock:</label>
+        <input type="number" id="qte" name="qte" required>
         <br>
-        <label for="montant_vente">Montant Vente:</label>
-        <input type="number" id="montant_vente" name="montant_vente" step="0.01" required>
+        <label for="montant">Montant Vente:</label>
+        <input type="number" id="montant" name="montant" step="0.01" required>
         <br>
         <label for="photo">Photo:</label>
         <input type="text" id="photo" name="photo" required>

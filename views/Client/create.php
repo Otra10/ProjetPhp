@@ -13,11 +13,11 @@
         <label for="prenom">Prénom:</label>
         <input type="text" id="prenom" name="prenom" required>
         <br>
-        <label for="telephone_portable">Téléphone Portable:</label>
-        <input type="text" id="telephone_portable" name="telephone_portable" required>
+        <label for="telephonePortable">Téléphone Portable:</label>
+        <input type="text" id="telephonePortable" name="telephonePortable" required>
         <br>
-        <label for="observations">Observations:</label>
-        <textarea id="observations" name="observations"></textarea>
+        <label for="observation">Observations:</label>
+        <textarea id="observation" name="observation"></textarea>
         <br>
         <label for="adresse">Adresse:</label>
         <input type="text" id="adresse" name="adresse" required>

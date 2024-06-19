@@ -12,7 +12,7 @@ class ArticleConfectionController extends Controller
         $model = new ArticleConfection();
         $articles = $model->getAll();
 
-        $this->renderView('', ['articles' => $articles]);
+        $this->renderView('ArticleConfection/liste', ['articles' => $articles]);
     }
 
     public function create()
@@ -28,11 +28,11 @@ class ArticleConfectionController extends Controller
             $model = new ArticleConfection();
             $model->create($libelle, $prix_achat, $quantite_achat, $quantite_stock, $montant_stock, $photo);
 
-            header('Location: /articles_confection');
+            header('Location: /ArticleConfection/liste.php');
         } else {
             $model = new ArticleConfection();
             $articles = $model->getAll();
-            $this->renderView('', ['articles' => $articles]);
+            $this->renderView('ArticleConfection/create', ['articles' => $articles]);
         }
     }
 

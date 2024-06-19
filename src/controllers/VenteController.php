@@ -11,7 +11,7 @@ class VenteController extends Controller
     {
         $model = new Vente();
         $ventes = $model->getAll();
-        include 'views/ventes/index.php';
+        $this->renderView("Vente/liste",["ventes"=>$ventes]);
     }
 
     public function create()
@@ -30,7 +30,7 @@ class VenteController extends Controller
 
             header('Location: /ventes');
         } else {
-            include 'views/ventes/create.php';
+            $this->renderView("Vente/create",[]);
         }
     }
 
@@ -42,7 +42,7 @@ class VenteController extends Controller
             $model = new Vente();
             $ventes = $model->getByDate($date);
 
-            include 'views/ventes/index.php';
+            $this->renderView("Vente/edit",[]);
         }
     }
 
@@ -54,7 +54,7 @@ class VenteController extends Controller
             $model = new Vente();
             $ventes = $model->getByClient($client_id);
 
-            include 'views/ventes/index.php';
+            $this->renderView("Vente/liste",["ventes"=>$ventes]);
         }
     }
 
@@ -66,7 +66,7 @@ class VenteController extends Controller
             $model = new Vente();
             $ventes = $model->getByArticle($article_id);
 
-            include 'views/ventes/index.php';
+            $this->renderView("Vente/liste",["ventes"=>$ventes]);
         }
     }
 }

@@ -12,14 +12,14 @@ class Client extends Model
         $this->ouvrirConnexion();
     }
 
-    public function create($nom, $prenom, $telephone_portable, $observations, $adresse, $photo)
+    public function create($nom, $prenom, $telephonePortable, $observations, $adresse, $photo)
     {
         $sql = "
-            INSERT INTO clients (nom, prenom, telephone_portable, observations, adresse, photo)
+            INSERT INTO clients (nom, prenom, telephonePortable, observation, adresse, photo)
             VALUES (?, ?, ?, ?, ?, ?)
         ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$nom, $prenom, $telephone_portable, $observations, $adresse, $photo]);
+        $stmt->execute([$nom, $prenom, $telephonePortable, $observations, $adresse, $photo]);
     }
 
     public function getAll()
@@ -39,15 +39,15 @@ class Client extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, $nom, $prenom, $telephone_portable, $observations, $adresse, $photo)
+    public function update($id, $nom, $prenom, $telephonePortable, $observations, $adresse, $photo)
     {
         $sql = "
             UPDATE clients
-            SET nom = ?, prenom = ?, telephone_portable = ?, observations = ?, adresse = ?, photo = ?
+            SET nom = ?, prenom = ?, telephonePortable = ?, observation = ?, adresse = ?, photo = ?
             WHERE id = ?
         ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$nom, $prenom, $telephone_portable, $observations, $adresse, $photo, $id]);
+        $stmt->execute([$nom, $prenom, $telephonePortable, $observations, $adresse, $photo, $id]);
     }
 
     public function delete($id)

@@ -15,7 +15,7 @@ class ArticleConfection extends Model
     public function create($libelle, $prix_achat, $quantite_achat, $quantite_stock, $montant_stock, $photo)
     {
         $sql = "
-            INSERT INTO articles_confection (libelle, prix_achat, quantite_achat, quantite_stock, montant_stock, photo)
+            INSERT INTO articleconfection (libelle, prix_achat, quantite_achat, quantite_stock, montant_stock, photo)
             VALUES (?, ?, ?, ?, ?, ?)
         ";
         $stmt = $this->pdo->prepare($sql);
@@ -24,7 +24,7 @@ class ArticleConfection extends Model
 
     public function getAll()
     {
-        $sql = "SELECT * FROM articles_confection";
+        $sql = "SELECT * FROM articleconfection";
         $stmt = $this->pdo->query($sql);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@ class ArticleConfection extends Model
 
     public function getById($id)
     {
-        $sql = "SELECT * FROM articles_confection WHERE id = ?";
+        $sql = "SELECT * FROM articleconfection WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
 
@@ -42,7 +42,7 @@ class ArticleConfection extends Model
     public function update($id, $libelle, $prix_achat, $quantite_achat, $quantite_stock, $montant_stock, $photo)
     {
         $sql = "
-            UPDATE articles_confection
+            UPDATE articleconfection
             SET libelle = ?, prix_achat = ?, quantite_achat = ?, quantite_stock = ?, montant_stock = ?, photo = ?
             WHERE id = ?
         ";
@@ -52,7 +52,7 @@ class ArticleConfection extends Model
 
     public function delete($id)
     {
-        $sql = "DELETE FROM articles_confection WHERE id = ?";
+        $sql = "DELETE FROM articleconfection WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
     }

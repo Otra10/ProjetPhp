@@ -5,9 +5,9 @@ use PDO;
 use PDOException;
 
 class Model{
-    protected $dsn = "mysql:host=192.168.56.56;dbname=mbayelab_tasky";
+    protected $dsn = "mysql:host=127.0.0.1;dbname=cours_php_ism";
     protected $username = 'root';
-    protected $password = 'secret';
+    protected $password = '';
     protected PDO|NULL $pdo = null;
 
     public function ouvrirConnexion()

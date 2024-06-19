@@ -11,7 +11,7 @@ class ClientController extends Controller
     {
         $model = new Client();
         $clients = $model->getAll();
-        include 'views/clients/index.php';
+        $this->renderView("Client/liste",["clients"=>$clients]);
     }
 
     public function create()
@@ -19,17 +19,17 @@ class ClientController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
-            $telephone_portable = $_POST['telephone_portable'];
-            $observations = $_POST['observations'];
+            $telephonePortable = $_POST['telephonePortable'];
+            $observations = $_POST['observation'];
             $adresse = $_POST['adresse'];
             $photo = $_POST['photo'];
 
             $model = new Client();
-            $model->create($nom, $prenom, $telephone_portable, $observations, $adresse, $photo);
+            $model->create($nom, $prenom, $telephonePortable, $observations, $adresse, $photo);
 
             header('Location: /clients');
         } else {
-            include 'views/clients/create.php';
+            $this->renderView("Client/create",[]);
         }
     }
 
@@ -41,16 +41,16 @@ class ClientController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
-            $telephone_portable = $_POST['telephone_portable'];
-            $observations = $_POST['observations'];
+            $telephonePortable = $_POST['telephonePortable'];
+            $observations = $_POST['observation'];
             $adresse = $_POST['adresse'];
             $photo = $_POST['photo'];
 
-            $model->update($id, $nom, $prenom, $telephone_portable, $observations, $adresse, $photo);
+            $model->update($id, $nom, $prenom, $telephonePortable, $observations, $adresse, $photo);
 
             header('Location: /clients');
         } else {
-            include 'views/clients/edit.php';
+            $this->renderView("Client/edit",["client"=>$client]);
         }
     }
 

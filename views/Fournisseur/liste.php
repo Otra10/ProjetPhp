@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Liste des Fournisseurs</h1>
-    <a href="/fournisseurs/create">Nouveau Fournisseur</a>
+    <a href="<?=webRoot?>/?controller=Fournisseur&action=create">Nouveau Fournisseur</a>
     <table>
         <thead>
             <tr>
@@ -24,13 +24,13 @@
                 <tr>
                     <td><?php echo $fournisseur['nom']; ?></td>
                     <td><?php echo $fournisseur['prenom']; ?></td>
-                    <td><?php echo $fournisseur['telephone_portable']; ?></td>
-                    <td><?php echo $fournisseur['telephone_fixe']; ?></td>
+                    <td><?php echo $fournisseur['telephonePortable']; ?></td>
+                    <td><?php echo $fournisseur['telephoneFixe']; ?></td>
                     <td><?php echo $fournisseur['adresse']; ?></td>
                     <td><img src="<?php echo $fournisseur['photo']; ?>" alt="Photo de <?php echo $fournisseur['nom']; ?>" width="50"></td>
                     <td>
-                        <a href="<?=webRoot?>/?controller=Fournisseur&action=edit/<?php echo $fournisseur['id']; ?>">Modifier</a>
-                        <a href="<?=webRoot?>/?controller=ArticleConfection&action=delete<?php echo $fournisseur['id']; ?>">Supprimer</a>
+                        <a href="<?=webRoot?>/?controller=Fournisseur&action=edit&id=<?php echo $fournisseur['id']; ?>">Modifier</a>
+                        <a href="<?=webRoot?>/?controller=ArticleConfection&action=delete&id=<?php echo $fournisseur['id']; ?>">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

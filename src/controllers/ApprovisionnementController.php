@@ -12,7 +12,7 @@ class ApprovisionnementController extends Controller
         $model = new Approvisionnement();
         $approvisionnements = $model->getAll();
 
-        $this->renderView("",["approvisionnement"=>$approvisionnements]);
+        $this->renderView("Approvisionnement/create",["approvisionnement"=>$approvisionnements]);
     }
 
     public function create()
@@ -31,7 +31,9 @@ class ApprovisionnementController extends Controller
 
             header('Location: /approvisionnements');
         } else {
-            include 'views/approvisionnements/create.php';
+            $model = new Approvisionnement();
+            $approvisionnements = $model->getAll();
+            $this->renderView("Approvisionnement/create",["approvisionnement"=>$approvisionnements]);
         }
     }
 }

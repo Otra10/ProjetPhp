@@ -13,7 +13,7 @@ class Approvisionnement extends Model
 
     public function create($date, $article_id, $fournisseur_id, $quantite, $prix, $montant, $observation) {
         $sql = "
-            INSERT INTO approvisionnements (date, article_id, fournisseur_id, quantite, prix, montant, observation)
+            INSERT INTO approvisionnement (date, articleConfectionId, fournisseurId, qte, prix, montant, observation)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ";
         $stmt = $this->pdo->prepare($sql);
@@ -22,7 +22,7 @@ class Approvisionnement extends Model
 
     public function getAll()
     {
-        $sql = "SELECT * FROM approvisionnements";
+        $sql = "SELECT * FROM approvisionnement";
         $stmt = $this->pdo->query($sql);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

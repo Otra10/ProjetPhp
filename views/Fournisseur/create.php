@@ -14,10 +14,10 @@
         <input type="text" id="prenom" name="prenom" required>
         <br>
         <label for="telephone_portable">Téléphone Portable:</label>
-        <input type="text" id="telephone_portable" name="telephone_portable" required>
+        <input type="text" id="telephonePortable" name="telephonePortable" required>
         <br>
         <label for="telephone_fixe">Téléphone Fixe:</label>
-        <input type="text" id="telephone_fixe" name="telephone_fixe">
+        <input type="text" id="telephonePixe" name="telephonePixe">
         <br>
         <label for="adresse">Adresse:</label>
         <input type="text" id="adresse" name="adresse" required>

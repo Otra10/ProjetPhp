@@ -42,7 +42,7 @@ class Controller
         ob_start();
         extract($datas);
 
-        require_once("../views/$dossier.html.php");
+        require_once("../views/$dossier.php");
 
         $contentView = ob_get_clean();
 

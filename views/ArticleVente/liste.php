@@ -22,13 +22,13 @@
             <?php foreach ($articles as $article): ?>
                 <tr>
                     <td><?php echo $article['libelle']; ?></td>
-                    <td><?php echo $article['prix_vente']; ?></td>
-                    <td><?php echo $article['quantite_stock']; ?></td>
-                    <td><?php echo $article['montant_vente']; ?></td>
+                    <td><?php echo $article['prix']; ?></td>
+                    <td><?php echo $article['qte']; ?></td>
+                    <td><?php echo $article['montant']; ?></td>
                     <td><img src="<?php echo $article['photo']; ?>" alt="Photo de <?php echo $article['libelle']; ?>" width="50"></td>
                     <td>
-                        <a href="<?=webRoot?>/?controller=ArticleVente&action=edit/<?php echo $article['id']; ?>">Modifier</a>
-                        <a href="<?=webRoot?>/?controller=ArticleVente&action=delete/<?php echo $article['id']; ?>">Supprimer</a>
+                        <a href="<?=webRoot?>/?controller=ArticleVente&action=edit&id=<?= $article['id']; ?>">Modifier</a>
+                        <a href="<?=webRoot?>/?controller=ArticleVente&action=delete&id=<?= $article['id']; ?>">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

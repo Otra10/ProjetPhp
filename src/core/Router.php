@@ -2,41 +2,70 @@
 
 namespace App\Core;
 
+use App\Controllers\ApprovisionnementController;
 use App\Controllers\ArticleConfectionController;
+use App\Controllers\ArticleVenteController;
+use App\Controllers\CategorieController;
+use App\Controllers\ClientController;
+use App\Controllers\FournisseurController;
+use App\Controllers\VenteController;
+use TypeController;
 
-class Router
-{
-    public static function route()
-    {
-        $controllerName = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : 'ArticleConfection';
+class Router {
+    public static function route() {
+        $controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : 'ArticleConfection';
         $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'index';
-        
-        $controllerClass =  $controllerName . 'Controller';
-        
-        $controllerFile = __DIR__ . "/../controllers/" . $controllerClass . ".php";
-        
-        if (file_exists($controllerFile)) {
-            require $controllerFile;
+        $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
+        $contentView = '';
 
-            if ($controllerClass) {
-                $controller = new ArticleConfectionController();
-
-                if (method_exists($controller, $action)) {
-                    $controller->{$action}();
-                } else {
-                    self::error404("Action '$action' not found in controller '$controllerClass'");
-                }
-            } else {
-                self::error404("Controller class '$controllerClass' not found");
+        if ($controller == "ArticleConfection") {
+            $controllerInstance = new ArticleConfectionController();
+            if ($id !== null) {
+                $contentView = $controllerInstance->{$action}($id);
             }
-        } else {
-            self::error404("Controller file '$controllerFile' not found");
+            $contentView = $controllerInstance->{$action}();
+        } elseif ($controller == "ArticleVente") {
+            $controllerInstance = new ArticleVenteController();
+            if ($id !== null) {
+                $contentView = $controllerInstance->{$action}($id);
+            }
+            $contentView = $controllerInstance->{$action}();
+        }elseif ($controller == "Vente") {
+            $controllerInstance = new VenteController();
+            if ($id !== null) {
+                $contentView = $controllerInstance->{$action}($id);
+            }
+            $contentView = $controllerInstance->{$action}();
+        }elseif ($controller == "Fournisseur") {
+       
+            $controllerInstance = new FournisseurController();
+            if ($id !== null) {
+                $contentView = $controllerInstance->{$action}($id);
+            }
+            $contentView = $controllerInstance->{$action}();
+        }elseif ($controller == "Approvisionnement") {
+            
+            $controllerInstance = new ApprovisionnementController();
+            if ($id !== null) {
+                $contentView = $controllerInstance->{$action}($id);
+            }
+            $contentView = $controllerInstance->{$action}();
+        }elseif ($controller == "Client") {
+            $controllerInstance = new ClientController();
+            if ($id !== null) {
+                $contentView = $controllerInstance->{$action}($id);
+            }
+            $contentView = $controllerInstance->{$action}();
         }
-    }
+         elseif ($controller == "categorie") {
+            $controllerInstance = new CategorieController();
+            if ($id !== null) {
+                $contentView = $controllerInstance->{$action}($id);
+            }
+            $contentView = $controllerInstance->{$action}();
+        }
 
-    public static function error404(string $message)
-    {
-        http_response_code(404);
-        include __DIR__ . '/../../views/errors/404.html.php';
+        require_once("../views/layout/base.layout.php");
     }
 }
+?>
