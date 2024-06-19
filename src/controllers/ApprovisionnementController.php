@@ -1,6 +1,7 @@
 <?php 
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Model\Approvisionnement;
 
 class ApprovisionnementController extends Controller {

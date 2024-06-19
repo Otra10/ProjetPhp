@@ -1,9 +1,10 @@
 <?php 
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Model\Client;
 
-class ClientController {
+class ClientController extends Controller{
     public function index() {
         $model = new Client();
         $clients = $model->getAll();

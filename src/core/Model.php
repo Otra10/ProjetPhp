@@ -1,4 +1,9 @@
 <?php
+namespace App\Core;
+
+use PDO;
+use PDOException;
+
     class Model{
         protected $dsn="mysql:host=127.0.0.1;dbname=cours_php_ism";
         protected $username='root';

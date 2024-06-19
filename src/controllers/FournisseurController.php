@@ -1,9 +1,10 @@
 <?php 
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Model\Fournisseur;
 
-class FournisseurController {
+class FournisseurController extends Controller {
     public function index() {
         $model = new Fournisseur();
         $fournisseurs = $model->getAll();

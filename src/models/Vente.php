@@ -1,7 +1,7 @@
 <?php 
 namespace App\Model;
+use App\Core\Model;
 
-use Model;
 use PDO;
 
 class Vente extends Model{

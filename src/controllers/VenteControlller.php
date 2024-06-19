@@ -1,9 +1,10 @@
 <?php 
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Model\Vente;
 
-class VenteController {
+class VenteController extends Controller{
     public function index() {
         $model = new Vente();
         $ventes = $model->getAll();

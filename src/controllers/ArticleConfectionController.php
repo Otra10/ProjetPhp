@@ -1,12 +1,11 @@
 <?php 
 namespace App\Controllers;
+use App\Core\Controller;
+use App\Model\ArticleConfection;
 
-use App\Model\ArticleVente;
-use  App\Model\ArticleConfection;
-
-class ArticleVenteController extends Controller {
+class ArticleConfectionController extends Controller {
     public function index() {
-        $model = new ArticleVente();
+        $model = new ArticleConfection();
         $articles = $model->getAll();
         $this->renderView("",["articles"=>$articles]);
     }
@@ -14,15 +13,16 @@ class ArticleVenteController extends Controller {
     public function create() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $libelle = $_POST['libelle'];
-            $prix_vente = $_POST['prix_vente'];
+            $prix_achat = $_POST['prix_achat'];
+            $quantite_achat = $_POST['quantite_achat'];
             $quantite_stock = $_POST['quantite_stock'];
-            $montant_vente = $_POST['montant_vente'];
+            $montant_stock = $_POST['montant_stock'];
             $photo = $_POST['photo'];
 
-            $model = new ArticleVente();
-            $model->create($libelle, $prix_vente, $quantite_stock, $montant_vente, $photo);
+            $model = new ArticleConfection();
+            $model->create($libelle, $prix_achat, $quantite_achat, $quantite_stock, $montant_stock, $photo);
 
-            header('Location: /articles_vente');
+            header('Location: /articles_confection');
         } else {
             $model = new ArticleConfection();
             $articles = $model->getAll();
@@ -31,19 +31,20 @@ class ArticleVenteController extends Controller {
     }
 
     public function edit($id) {
-        $model = new ArticleVente();
+        $model = new ArticleConfection();
         $article = $model->getById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $libelle = $_POST['libelle'];
-            $prix_vente = $_POST['prix_vente'];
+            $prix_achat = $_POST['prix_achat'];
+            $quantite_achat = $_POST['quantite_achat'];
             $quantite_stock = $_POST['quantite_stock'];
-            $montant_vente = $_POST['montant_vente'];
+            $montant_stock = $_POST['montant_stock'];
             $photo = $_POST['photo'];
 
-            $model->update($id, $libelle, $prix_vente, $quantite_stock, $montant_vente, $photo);
+            $model->update($id, $libelle, $prix_achat, $quantite_achat, $quantite_stock, $montant_stock, $photo);
 
-            header('Location: /articles_vente');
+            header('Location: /articles_confection');
         } else {
             $model = new ArticleConfection();
             $articles = $model->getAll();
@@ -52,8 +53,8 @@ class ArticleVenteController extends Controller {
     }
 
     public function delete($id) {
-        $model = new ArticleVente();
+        $model = new ArticleConfection();
         $model->delete($id);
-        header('Location: /articles_vente');
+        header('Location: /articles_confection');
     }
 }

@@ -1,4 +1,6 @@
 <?php
+namespace App\Core;
+use App\Controllers\ArticleConfectionController;
 class Router
 {
     public static function route()

@@ -1,7 +1,6 @@
 <?php 
 namespace App\Model;
-
-use Model;
+use App\Core\Model;
 use PDO;
 
 class ArticleVente extends Model{

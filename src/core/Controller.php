@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers;
+namespace App\Core;
 
 use App\Model\ArticleConfection;
 use App\Model\ArticleVente;
