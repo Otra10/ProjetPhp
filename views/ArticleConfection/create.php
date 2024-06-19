@@ -10,17 +10,17 @@
         <label for="libelle">Libellé:</label>
         <input type="text" id="libelle" name="libelle" required>
         <br>
-        <label for="prix_achat">Prix Achat:</label>
-        <input type="number" id="prix_achat" name="prix_achat" step="0.01" required>
+        <label for="prixAchat">Prix Achat:</label>
+        <input type="number" id="prixAchat" name="prixAchat" step="0.01" required>
         <br>
-        <label for="quantite_achat">Quantité Achat:</label>
-        <input type="number" id="quantite_achat" name="quantite_achat" required>
+        <label for="qteAchat">Quantité Achat:</label>
+        <input type="number" id="qteAchat" name="qteAchat" required>
         <br>
-        <label for="quantite_stock">Quantité Stock:</label>
-        <input type="number" id="quantite_stock" name="quantite_stock" required>
+        <label for="qteStock">Quantité Stock:</label>
+        <input type="number" id="qteStock" name="qteStock" required>
         <br>
-        <label for="montant_stock">Montant en Stock:</label>
-        <input type="number" id="montant_stock" name="montant_stock" step="0.01" required>
+        <label for="montantStock">Montant en Stock:</label>
+        <input type="number" id="montantStock" name="montantStock" step="0.01" required>
         <br>
         <label for="photo">Photo:</label>
         <input type="text" id="photo" name="photo" required>

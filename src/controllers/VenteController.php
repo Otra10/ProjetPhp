@@ -3,34 +3,55 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Model\ArticleVente;
+use App\Model\Client;
 use App\Model\Vente;
 
 class VenteController extends Controller
 {
     public function index()
     {
-        $model = new Vente();
-        $ventes = $model->getAll();
-        $this->renderView("Vente/liste",["ventes"=>$ventes]);
+        $articleModel = new ArticleVente();
+        $clientModel = new Client();
+        $venteModel=new Vente();
+        $articles = $articleModel->getAll();
+        $clients = $clientModel->getAll();
+        $ventes = $venteModel->getAll();
+        $this->renderView("Vente/liste",[
+            "ventes"=>$ventes,
+            "articles"=>$articles,
+            "clients"=>$clients,
+    
+    ]);
     }
 
     public function create()
     {
+        $articleModel = new ArticleVente();
+        $clientModel = new Client();
+        $venteModel=new Vente();
+        $articles = $articleModel->getAll();
+        $clients = $clientModel->getAll();
+        $ventes = $venteModel->getAll();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $date = $_POST['date'];
-            $article_id = $_POST['article_id'];
-            $client_id = $_POST['client_id'];
-            $quantite = $_POST['quantite'];
+            $articleId = $_POST['articleId'];
+            $clientId = $_POST['clientId'];
+            $qte = $_POST['qte'];
             $prix = $_POST['prix'];
             $montant = $_POST['montant'];
             $observation = $_POST['observation'];
 
             $model = new Vente();
-            $model->create($date, $article_id, $client_id, $quantite, $prix, $montant, $observation);
+            $model->create($date, $articleId, $clientId, $qte, $prix, $montant, $observation);
 
-            header('Location: /ventes');
+            header('location:'.webRoot.'/?controller=Vente');
         } else {
-            $this->renderView("Vente/create",[]);
+            $this->renderView("Vente/create",[
+                    "ventes"=>$ventes,
+                    "articles"=>$articles,
+                    "clients"=>$clients
+            ]);
         }
     }
 
@@ -49,10 +70,10 @@ class VenteController extends Controller
     public function filterByClient()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $client_id = $_POST['client_id'];
+            $clientId = $_POST['clientId'];
 
             $model = new Vente();
-            $ventes = $model->getByClient($client_id);
+            $ventes = $model->getByClient($clientId);
 
             $this->renderView("Vente/liste",["ventes"=>$ventes]);
         }
@@ -61,10 +82,10 @@ class VenteController extends Controller
     public function filterByArticle()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $article_id = $_POST['article_id'];
+            $articleId = $_POST['articleId'];
 
             $model = new Vente();
-            $ventes = $model->getByArticle($article_id);
+            $ventes = $model->getByArticle($articleId);
 
             $this->renderView("Vente/liste",["ventes"=>$ventes]);
         }

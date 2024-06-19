@@ -19,16 +19,16 @@ class ArticleConfectionController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $libelle = $_POST['libelle'];
-            $prix_achat = $_POST['prix_achat'];
-            $quantite_achat = $_POST['quantite_achat'];
-            $quantite_stock = $_POST['quantite_stock'];
-            $montant_stock = $_POST['montant_stock'];
+            $prixAchat = $_POST['prixAchat'];
+            $qteAchat = $_POST['qteAchat'];
+            $qteStock = $_POST['qteStock'];
+            $montantStock = $_POST['montantStock'];
             $photo = $_POST['photo'];
 
             $model = new ArticleConfection();
-            $model->create($libelle, $prix_achat, $quantite_achat, $quantite_stock, $montant_stock, $photo);
+            $model->create($libelle, $prixAchat, $qteAchat, $qteStock, $montantStock, $photo);
 
-            header('Location: /ArticleConfection/liste.php');
+            header('location:'.webRoot.'/?controller=ArticleConfection');
         } else {
             $model = new ArticleConfection();
             $articles = $model->getAll();
@@ -40,23 +40,20 @@ class ArticleConfectionController extends Controller
     {
         $model = new ArticleConfection();
         $article = $model->getById($id);
-
+  
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $libelle = $_POST['libelle'];
-            $prix_achat = $_POST['prix_achat'];
-            $quantite_achat = $_POST['quantite_achat'];
-            $quantite_stock = $_POST['quantite_stock'];
-            $montant_stock = $_POST['montant_stock'];
+            $prixAchat = $_POST['prixAchat'];
+            $qteAchat = $_POST['qteAchat'];
+            $qteStock = $_POST['qteStock'];
+            $montantStock = $_POST['montantStock'];
             $photo = $_POST['photo'];
 
-            $model->update($id, $libelle, $prix_achat, $quantite_achat, $quantite_stock, $montant_stock, $photo);
+            $model->update($id, $libelle, $prixAchat, $qteAchat, $qteStock, $montantStock, $photo);
 
-            header('Location: /articles_confection');
+            header('location:'.webRoot.'/?controller=ArticleConfection');
         } else {
-            $model = new ArticleConfection();
-            $articles = $model->getAll();
-
-            $this->renderView('', ['articles' => $articles]);
+            $this->renderView('ArticleConfection/edit', ['article' => $article]);
         }
     }
 
@@ -64,6 +61,6 @@ class ArticleConfectionController extends Controller
     {
         $model = new ArticleConfection();
         $model->delete($id);
-        header('Location: /articles_confection');
+        header('location:'.webRoot.'/?controller=ArticleConfection');
     }
 }

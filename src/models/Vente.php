@@ -12,18 +12,18 @@ class Vente extends Model
         $this->ouvrirConnexion();
     }
 
-    public function create($date, $article_id, $client_id, $quantite, $prix, $montant, $observation) {
+    public function create($date, $articlId, $clientId, $quantite, $prix, $montant, $observation) {
         $sql = "
-            INSERT INTO ventes (date, article_id, client_id, quantite, prix, montant, observation)
+            INSERT INTO ventes (date, articlId, clientId, quantite, prix, montant, observation)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$date, $article_id, $client_id, $quantite, $prix, $montant, $observation]);
+        $stmt->execute([$date, $articlId, $clientId, $quantite, $prix, $montant, $observation]);
     }
 
     public function getAll()
     {
-        $sql = "SELECT * FROM ventes";
+        $sql = "select * from `ventes` a, articleVente c, clients t where a.`clientId` = t.id and a.articleVenteId=c.id";
         $stmt = $this->pdo->query($sql);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -38,20 +38,20 @@ class Vente extends Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getByClient($client_id)
+    public function getByClient($clientId)
     {
-        $sql = "SELECT * FROM ventes WHERE client_id = ?";
+        $sql = "SELECT * FROM ventes WHERE clientId = ?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$client_id]);
+        $stmt->execute([$clientId]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getByArticle($article_id)
+    public function getByArticle($articlId)
     {
-        $sql = "SELECT * FROM ventes WHERE article_id = ?";
+        $sql = "SELECT * FROM ventes WHERE articlId = ?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$article_id]);
+        $stmt->execute([$articlId]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

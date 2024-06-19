@@ -29,7 +29,7 @@ class FournisseurController extends Controller
             $model = new Fournisseur();
             $model->create($nom, $prenom, $telephone_portable, $telephone_fixe, $adresse, $photo);
 
-            header('Location: /fournisseurs');
+            header('location:'.webRoot.'/?controller=Fournisseur');
         } else {
             $this->renderView("Fournisseur/create",[]);
         }
@@ -53,7 +53,7 @@ class FournisseurController extends Controller
             
             $model->update($id, $nom, $prenom, $telephonePortable, $telephoneFixe, $adresse, $photo);
 
-            header('Location: /Fournisseur');
+            header('location:'.webRoot.'/?controller=Fournisseur');
         } else {
             $this->renderView("Fournisseur/edit",["fournisseur"=>$fournisseur]);
         }
@@ -63,6 +63,6 @@ class FournisseurController extends Controller
     {
         $model = new Fournisseur();
         $model->delete($id);
-        header('Location: /fournisseurs');
+        header('location:'.webRoot.'/?controller=Fournisseur');
     }
 }

@@ -23,14 +23,14 @@
             <?php foreach ($articles as $article): ?>
                 <tr>
                     <td><?php echo $article['libelle']; ?></td>
-                    <td><?php echo $article['prix_achat']; ?></td>
-                    <td><?php echo $article['quantite_achat']; ?></td>
-                    <td><?php echo $article['quantite_stock']; ?></td>
-                    <td><?php echo $article['montant_stock']; ?></td>
+                    <td><?php echo $article['prixAchat']; ?></td>
+                    <td><?php echo $article['qteAchat']; ?></td>
+                    <td><?php echo $article['qteStock']; ?></td>
+                    <td><?php echo $article['montantStock']; ?></td>
                     <td><img src="<?php echo $article['photo']; ?>" alt="Photo de <?php echo $article['libelle']; ?>" width="50"></td>
                     <td>
-                        <a href="<?=webRoot?>/?controller=ArticleConfection&action=edit/<?php echo $article['id']; ?>">Modifier</a>
-                        <a href="<?=webRoot?>/?controller=ArticleConfection&action=delete/<?php echo $article['id']; ?>">Supprimer</a>
+                        <a href="<?=webRoot?>/?controller=ArticleConfection&action=edit&id=<?= $article['id']; ?>">Modifier</a>
+                        <a href="<?=webRoot?>/?controller=ArticleConfection&action=delete&id=<?= $article['id']; ?>">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

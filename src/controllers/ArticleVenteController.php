@@ -60,6 +60,6 @@ class ArticleVenteController extends Controller
         $model = new ArticleVente();
         $model->delete($id);
 
-        header('Location: /articles');
+        header('location:'.webRoot.'/?controller=ArticleVente');
     }
 }

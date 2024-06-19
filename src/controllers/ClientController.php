@@ -27,7 +27,7 @@ class ClientController extends Controller
             $model = new Client();
             $model->create($nom, $prenom, $telephonePortable, $observations, $adresse, $photo);
 
-            header('Location: /clients');
+            header('location:'.webRoot.'/?controller=Client');
         } else {
             $this->renderView("Client/create",[]);
         }
@@ -48,7 +48,7 @@ class ClientController extends Controller
 
             $model->update($id, $nom, $prenom, $telephonePortable, $observations, $adresse, $photo);
 
-            header('Location: /clients');
+            header('location:'.webRoot.'/?controller=Client');
         } else {
             $this->renderView("Client/edit",["client"=>$client]);
         }
@@ -58,6 +58,6 @@ class ClientController extends Controller
     {
         $model = new Client();
         $model->delete($id);
-        header('Location: /clients');
+        header('location:'.webRoot.'/?controller=Client');
     }
 }

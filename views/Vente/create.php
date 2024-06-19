@@ -10,18 +10,22 @@
         <label for="date">Date:</label>
         <input type="date" id="date" name="date" required>
         <br>
-        <label for="article_id">Article:</label>
-        <select id="article_id" name="article_id">
-            <!-- Options des articles -->
+        <label for="clientId">Filtrer par Client:</label>
+        <select id="clientId" name="clientId">
+        <?php foreach ($clients as $client):?>
+                    <option value=<?=$client['id']?>><?=$client['nom']?></option>;
+                <?php endforeach?>
         </select>
         <br>
-        <label for="client_id">Client:</label>
-        <select id="client_id" name="client_id">
-            <!-- Options des clients -->
+        <label for="articleId">Filtrer par Article:</label>
+        <select id="articleId" name="articleId">
+            <?php foreach ($articles as $article):?>
+                    <option value=<?=$article['id']?>><?=$article['libelle']?></option>;
+                <?php endforeach?>
         </select>
         <br>
-        <label for="quantite">Quantité:</label>
-        <input type="number" id="quantite" name="quantite" required>
+        <label for="qte">Quantité:</label>
+        <input type="number" id="qte" name="qte" required>
         <br>
         <label for="prix">Prix:</label>
         <input type="number" id="prix" name="prix" step="0.01" required>

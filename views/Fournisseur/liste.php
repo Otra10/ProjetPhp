@@ -30,7 +30,7 @@
                     <td><img src="<?php echo $fournisseur['photo']; ?>" alt="Photo de <?php echo $fournisseur['nom']; ?>" width="50"></td>
                     <td>
                         <a href="<?=webRoot?>/?controller=Fournisseur&action=edit&id=<?php echo $fournisseur['id']; ?>">Modifier</a>
-                        <a href="<?=webRoot?>/?controller=ArticleConfection&action=delete&id=<?php echo $fournisseur['id']; ?>">Supprimer</a>
+                        <a href="<?=webRoot?>/?controller=Fournisseur&action=delete&id=<?php echo $fournisseur['id']; ?>">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

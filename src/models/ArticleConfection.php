@@ -12,14 +12,14 @@ class ArticleConfection extends Model
         $this->ouvrirConnexion();
     }
 
-    public function create($libelle, $prix_achat, $quantite_achat, $quantite_stock, $montant_stock, $photo)
+    public function create($libelle, $prixAchat, $qteAchat, $qteStock, $montantStock, $photo)
     {
         $sql = "
-            INSERT INTO articleconfection (libelle, prix_achat, quantite_achat, quantite_stock, montant_stock, photo)
+            INSERT INTO articleconfection (libelle, prixAchat, qteAchat, qteStock, montantStock, photo)
             VALUES (?, ?, ?, ?, ?, ?)
         ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$libelle, $prix_achat, $quantite_achat, $quantite_stock, $montant_stock, $photo]);
+        $stmt->execute([$libelle, $prixAchat, $qteAchat, $qteStock, $montantStock, $photo]);
     }
 
     public function getAll()
@@ -39,15 +39,15 @@ class ArticleConfection extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, $libelle, $prix_achat, $quantite_achat, $quantite_stock, $montant_stock, $photo)
+    public function update($id, $libelle, $prixAchat, $qteAchat, $qteStock, $montantStock, $photo)
     {
         $sql = "
             UPDATE articleconfection
-            SET libelle = ?, prix_achat = ?, quantite_achat = ?, quantite_stock = ?, montant_stock = ?, photo = ?
+            SET libelle = ?, prixAchat = ?, qteAchat = ?, qteStock = ?, montantStock = ?, photo = ?
             WHERE id = ?
         ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$libelle, $prix_achat, $quantite_achat, $quantite_stock, $montant_stock, $photo, $id]);
+        $stmt->execute([$libelle, $prixAchat, $qteAchat, $qteStock, $montantStock, $photo, $id]);
     }
 
     public function delete($id)
