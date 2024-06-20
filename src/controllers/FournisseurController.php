@@ -21,8 +21,8 @@ class FournisseurController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
-            $telephone_portable = $_POST['telephone_portable'];
-            $telephone_fixe = $_POST['telephone_fixe'];
+            $telephone_portable = $_POST['telephonePortable'];
+            $telephone_fixe = $_POST['telephoneFixe'];
             $adresse = $_POST['adresse'];
             $photo = $_POST['photo'];
 
@@ -37,13 +37,12 @@ class FournisseurController extends Controller
 
     public function edit($id)
     {
-        // $id = $_REQUEST['id'];
+       
         $model = new Fournisseur();
         $fournisseur = $model->getById($id);
-        var_dump($fournisseur);
+    
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // var_dump($_POST);
-            // var_dump($model);
+           
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
             $telephonePortable = $_POST['telephonePortable'];

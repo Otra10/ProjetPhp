@@ -1,40 +1,33 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des Fournisseurs</title>
-</head>
-<body>
-    <h1>Liste des Fournisseurs</h1>
-    <a href="<?=webRoot?>/?controller=Fournisseur&action=create">Nouveau Fournisseur</a>
-    <table>
-        <thead>
+
+    <h1 class="text-2xl font-semibold mb-4">Liste des Fournisseurs</h1>
+    <a href="<?=webRoot?>/?controller=Fournisseur&action=create" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Nouveau Fournisseur</a>
+    <div class="mt-4">
+    <table class="min-w-full bg-white">
+        <thead class="bg-gray-800 text-white">
             <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Téléphone Portable</th>
-                <th>Téléphone Fixe</th>
-                <th>Adresse</th>
-                <th>Photo</th>
-                <th>Actions</th>
+                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Nom</th>
+                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Prénom</th>
+                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Téléphone Portable</th>
+                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Téléphone Fixe</th>
+                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Adresse</th>
+                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Photo</th>
+                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-gray-700">
             <?php foreach ($fournisseurs as $fournisseur): ?>
                 <tr>
-                    <td><?php echo $fournisseur['nom']; ?></td>
-                    <td><?php echo $fournisseur['prenom']; ?></td>
-                    <td><?php echo $fournisseur['telephonePortable']; ?></td>
-                    <td><?php echo $fournisseur['telephoneFixe']; ?></td>
-                    <td><?php echo $fournisseur['adresse']; ?></td>
-                    <td><img src="<?php echo $fournisseur['photo']; ?>" alt="Photo de <?php echo $fournisseur['nom']; ?>" width="50"></td>
-                    <td>
-                        <a href="<?=webRoot?>/?controller=Fournisseur&action=edit&id=<?php echo $fournisseur['id']; ?>">Modifier</a>
-                        <a href="<?=webRoot?>/?controller=Fournisseur&action=delete&id=<?php echo $fournisseur['id']; ?>">Supprimer</a>
+                    <td class="w-1/6 py-3 px-4"><?php echo $fournisseur['nom']; ?></td>
+                    <td class="w-1/6 py-3 px-4"><?php echo $fournisseur['prenom']; ?></td>
+                    <td class="w-1/6 py-3 px-4"><?php echo $fournisseur['telephonePortable']; ?></td>
+                    <td class="w-1/6 py-3 px-4"><?php echo $fournisseur['telephoneFixe']; ?></td>
+                    <td class="w-1/6 py-3 px-4"><?php echo $fournisseur['adresse']; ?></td>
+                    <td class="w-1/6 py-3 px-4"><img src="<?php echo $fournisseur['photo']; ?>" alt="Photo de <?php echo $fournisseur['nom']; ?>" class="h-12 w-12 rounded-full"></td>
+                    <td class="w-1/6 py-3 px-4">
+                        <a href="<?=webRoot?>/?controller=Fournisseur&action=edit&id=<?= $fournisseur['id']; ?>" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700">Modifier</a>
+                        <a href="<?=webRoot?>/?controller=Fournisseur&action=delete&id=<?= $fournisseur['id']; ?>" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 ml-2">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-</body>
-</html>

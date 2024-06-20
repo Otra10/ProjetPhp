@@ -2,36 +2,43 @@
 
 namespace App\Controllers;
 
-use App\Core\Controller;
 use App\Model\Utilisateur;
 
-class AuthController extends Controller
+class AuthController
 {
     public function login()
     {
+        $utilisateur=new Utilisateur();
+   
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $userModel = new Utilisateur();
-            $user = $userModel->authenticate($username, $password);
-
-            $this->renderView('', ['user' => $user]);
-
-            if ($user) {
-                $_SESSION['user'] = $user;
-                header('Location: /dashboard');
+            $userConnect=$utilisateur->authenticate($username,$password);
+            
+            if ($userConnect!==false) {
+                
+                $_SESSION['user'] = $userConnect;
+                
+                header('Location: ' . webRoot . '/?controller=Home');
+                
             } else {
+               
                 $error = 'Nom d\'utilisateur ou mot de passe incorrect';
-                include 'views/auth/login.php';
+                require_once("../views/auth/login.php");
             }
+
         } else {
-            include 'views/auth/login.php';
+           
+            require_once("../views/auth/login.php");
+            
         }
     }
 
     public function logout()
     {
+        session_start();
+        $_SESSION = array();
         session_destroy();
-        header('Location: /login');
+        header('Location: ' . webRoot . '/?controller=Auth&action=login');
     }
 }

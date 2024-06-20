@@ -12,13 +12,13 @@ class Vente extends Model
         $this->ouvrirConnexion();
     }
 
-    public function create($date, $articlId, $clientId, $quantite, $prix, $montant, $observation) {
+    public function create($date, $articleId, $clientId, $quantite, $prix, $montant, $observation) {
         $sql = "
-            INSERT INTO ventes (date, articlId, clientId, quantite, prix, montant, observation)
+            INSERT INTO ventes (date, articleVenteId, clientId, qte, prix, montant, observation)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$date, $articlId, $clientId, $quantite, $prix, $montant, $observation]);
+        $stmt->execute([$date, $articleId, $clientId, $quantite, $prix, $montant, $observation]);
     }
 
     public function getAll()
@@ -49,7 +49,7 @@ class Vente extends Model
 
     public function getByArticle($articlId)
     {
-        $sql = "SELECT * FROM ventes WHERE articlId = ?";
+        $sql = "SELECT * FROM ventes WHERE articleVenteId = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$articlId]);
 

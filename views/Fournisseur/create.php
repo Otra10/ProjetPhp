@@ -1,33 +1,28 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Nouveau Fournisseur</title>
-</head>
-<body>
-    <h1>Nouveau Fournisseur</h1>
-    <form action="<?=webRoot?>" method="POST">
-        <label for="nom">Nom:</label>
-        <input type="text" id="nom" name="nom" required>
-        <br>
-        <label for="prenom">Prénom:</label>
-        <input type="text" id="prenom" name="prenom" required>
-        <br>
-        <label for="telephone_portable">Téléphone Portable:</label>
-        <input type="text" id="telephonePortable" name="telephonePortable" required>
-        <br>
-        <label for="telephone_fixe">Téléphone Fixe:</label>
-        <input type="text" id="telephonePixe" name="telephonePixe">
-        <br>
-        <label for="adresse">Adresse:</label>
-        <input type="text" id="adresse" name="adresse" required>
-        <br>
-        <label for="photo">Photo:</label>
-        <input type="text" id="photo" name="photo" required>
-        <br>
-        <button type="submit">Enregistrer</button>
-        <input type="hidden" name="action" value="create">
-        <input type="hidden" name="controller" value="Fournisseur">
-    </form>
-</body>
-</html>
+<div class="w-full lg:w-3/4 xl:w-4/5 p-6">
+    <div class="bg-white shadow-md rounded p-4">
+        <h1 class="text-2xl font-semibold mb-4">Nouveau Fournisseur</h1>
+        <form action="<?= webRoot ?>" method="POST" class="space-y-4">
+            <label for="nom" class="block text-gray-700">Nom:</label>
+            <input type="text" id="nom" name="nom" required class="border border-gray-300 p-2 rounded w-full">
+            <br>
+            <label for="prenom" class="block text-gray-700">Prénom:</label>
+            <input type="text" id="prenom" name="prenom" required class="border border-gray-300 p-2 rounded w-full">
+            <br>
+            <label for="telephonePortable" class="block text-gray-700">Téléphone Portable:</label>
+            <input type="text" id="telephonePortable" name="telephonePortable" required class="border border-gray-300 p-2 rounded w-full">
+            <br>
+            <label for="telephoneFixe" class="block text-gray-700">Téléphone Fixe:</label>
+            <input type="text" id="telephoneFixe" name="telephoneFixe" class="border border-gray-300 p-2 rounded w-full">
+            <br>
+            <label for="adresse" class="block text-gray-700">Adresse:</label>
+            <input type="text" id="adresse" name="adresse" required class="border border-gray-300 p-2 rounded w-full">
+            <br>
+            <label for="photo" class="block text-gray-700">Photo:</label>
+            <input type="text" id="photo" name="photo" required class="border border-gray-300 p-2 rounded w-full">
+            <br>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Enregistrer</button>
+            <input type="hidden" name="action" value="create">
+            <input type="hidden" name="controller" value="Fournisseur">
+        </form>
+    </div>
+</div>

@@ -26,7 +26,7 @@ class ArticleVenteController extends Controller
             $model = new ArticleVente();
             $model->create($libelle, $prix, $qte, $montant, $photo);
 
-            header('Location: /ArticleVente/liste');
+            header('location:'.webRoot.'/?controller=ArticleVente');
         } else {
             $model = new ArticleConfection();
             $articles = $model->getAll();
