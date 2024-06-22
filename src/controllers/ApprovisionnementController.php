@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Model\Approvisionnement;
+use App\Model\ArticleConfection;
+use App\Model\Fournisseur;
 
 class ApprovisionnementController extends Controller
 {
@@ -12,7 +14,7 @@ class ApprovisionnementController extends Controller
         $model = new Approvisionnement();
         $approvisionnements = $model->getAll();
 
-        $this->renderView("Approvisionnement/create",["approvisionnement"=>$approvisionnements]);
+        $this->renderView("Approvisionnement/liste",["approvisionnements"=>$approvisionnements]);
     }
 
     public function create()
@@ -29,11 +31,19 @@ class ApprovisionnementController extends Controller
             $model = new Approvisionnement();
             $model->create($date, $article_id, $fournisseur_id, $quantite, $prix, $montant, $observation);
 
-            header('Location: /approvisionnements');
+            header('location:'.webRoot.'/?controller=Approvisionnement');
         } else {
             $model = new Approvisionnement();
+            $Fmodel = new Fournisseur();
+            $Amodel = new ArticleConfection();
             $approvisionnements = $model->getAll();
-            $this->renderView("Approvisionnement/create",["approvisionnement"=>$approvisionnements]);
+            $fournisseurs = $Fmodel->getAll();
+            $articles = $Amodel->getAll();
+            $this->renderView("Approvisionnement/create",[
+                "approvisionnement"=>$approvisionnements,
+                "fournisseurs"=>$fournisseurs,
+                "articles"=>$articles
+            ]);
         }
     }
 }

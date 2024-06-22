@@ -16,8 +16,8 @@
                 </select>
             </div>
             <div>
-                <label for="articleId" class="block text-gray-700">Article:</label>
-                <select id="articleId" name="articleId" required class="border border-gray-300 p-2 rounded w-full">
+                <label for="articleVenteId" class="block text-gray-700">Article:</label>
+                <select id="articleVenteId" name="articleVenteId" required class="border border-gray-300 p-2 rounded w-full">
                     <?php foreach ($articles as $article): ?>
                         <option value="<?= $article['id'] ?>"><?= $article['libelle'] ?></option>
                     <?php endforeach ?>

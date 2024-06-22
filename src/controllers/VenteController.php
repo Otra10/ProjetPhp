@@ -13,29 +13,29 @@ class VenteController extends Controller
     {
         $articleModel = new ArticleVente();
         $clientModel = new Client();
-        $venteModel=new Vente();
+        $venteModel = new Vente();
         $articles = $articleModel->getAll();
         $clients = $clientModel->getAll();
         $ventes = $venteModel->getAll();
-        $this->renderView("Vente/liste",[
-            "ventes"=>$ventes,
-            "articles"=>$articles,
-            "clients"=>$clients,
-    
-    ]);
+        $this->renderView("Vente/liste", [
+            "ventes" => $ventes,
+            "articles" => $articles,
+            "clients" => $clients,
+
+        ]);
     }
 
     public function create()
     {
         $articleModel = new ArticleVente();
         $clientModel = new Client();
-        $venteModel=new Vente();
+        $venteModel = new Vente();
         $articles = $articleModel->getAll();
         $clients = $clientModel->getAll();
         $ventes = $venteModel->getAll();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $date = $_POST['date'];
-            $articleId = $_POST['articleId'];
+            $articleId = $_POST['articleVenteId'];
             $clientId = $_POST['clientId'];
             $qte = $_POST['qte'];
             $prix = $_POST['prix'];
@@ -45,12 +45,12 @@ class VenteController extends Controller
             $model = new Vente();
             $model->create($date, $articleId, $clientId, $qte, $prix, $montant, $observation);
 
-            header('location:'.webRoot.'/?controller=Vente');
+            header('location:' . webRoot . '/?controller=Vente');
         } else {
-            $this->renderView("Vente/create",[
-                    "ventes"=>$ventes,
-                    "articles"=>$articles,
-                    "clients"=>$clients
+            $this->renderView("Vente/create", [
+                "ventes" => $ventes,
+                "articles" => $articles,
+                "clients" => $clients
             ]);
         }
     }
@@ -63,7 +63,16 @@ class VenteController extends Controller
             $model = new Vente();
             $ventes = $model->getByDate($date);
 
-            $this->renderView("Vente/edit",[]);
+            $articleModel = new ArticleVente();
+            $clientModel = new Client();
+            $articles = $articleModel->getAll();
+            $clients = $clientModel->getAll();
+            $this->renderView("Vente/liste", [
+                "ventes" => $ventes,
+                "articles" => $articles,
+                "clients" => $clients,
+
+            ]);
         }
     }
 
@@ -75,7 +84,16 @@ class VenteController extends Controller
             $model = new Vente();
             $ventes = $model->getByClient($clientId);
 
-            $this->renderView("Vente/liste",["ventes"=>$ventes]);
+            $articleModel = new ArticleVente();
+            $clientModel = new Client();
+            $articles = $articleModel->getAll();
+            $clients = $clientModel->getAll();
+            $this->renderView("Vente/liste", [
+                "ventes" => $ventes,
+                "articles" => $articles,
+                "clients" => $clients,
+
+            ]);
         }
     }
 
@@ -87,7 +105,16 @@ class VenteController extends Controller
             $model = new Vente();
             $ventes = $model->getByArticle($articleId);
 
-            $this->renderView("Vente/liste",["ventes"=>$ventes]);
+            $articleModel = new ArticleVente();
+            $clientModel = new Client();
+            $articles = $articleModel->getAll();
+            $clients = $clientModel->getAll();
+            $this->renderView("Vente/liste", [
+                "ventes" => $ventes,
+                "articles" => $articles,
+                "clients" => $clients,
+
+            ]);
         }
     }
 }

@@ -2,42 +2,55 @@
 
 namespace App\Controllers;
 
-use App\Model\Categorie;
 use App\Core\Controller;
+use App\Model\Categorie;
 
 class CategorieController extends Controller
 {
-    private CategorieModel $categorieModel;
-
-    public function __construct()
+    public function index()
     {
-        $this->categorieModel = new CategorieModel();
-        $this->load();
+        $model = new Categorie();
+        $categories = $model->getAll();
+        $this->renderView("categorie/liste", ["categories" => $categories]);
     }
 
-    public function load()
+    public function create()
     {
-        if (isset($_REQUEST['action'])) {
-            if ($_REQUEST['action'] == 'listeCategorie') {
-                $this->listerCategorie();
-            } elseif ($_REQUEST['action'] == 'FormCategorie') {
-                $this->AjoutCategorie();
-            }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nomCategorie = $_POST['nomCategorie'];
+
+            $model = new Categorie();
+            $model->create($nomCategorie);
+
+            header('Location: ' . webRoot . '/?controller=Categorie');
+            exit();
         } else {
-            $this->listerCategorie();
+            $this->renderView("categorie/liste", []);
         }
     }
 
-    function listerCategorie()
+    public function edit($id)
     {
-        $categories = $this->categorieModel->findAll();
+        $model = new Categorie();
+        $categorie = $model->getById($id);
 
-        $this->renderView('categories/liste', ['categories' => $categories]);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nomCategorie = $_POST['nomCategorie'];
+            $model->update($id, $nomCategorie);
+
+            header('Location: ' . webRoot . '/?controller=Categorie');
+            exit();
+        } else {
+            $this->renderView("categorie/edit", ["categorie" => $categorie]);
+        }
     }
 
-    function AjoutCategorie(){
-        $this->categorieModel->saveAll();
-        header("location:" . webRoot . "/?controller=categorie&action=listeCategorie");
+    public function delete($id)
+    {
+        $model = new Categorie();
+        $model->delete($id);
+
+        header('Location: ' . webRoot . '/?controller=Categorie');
+        exit();
     }
 }
-?>

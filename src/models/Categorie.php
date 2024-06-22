@@ -14,7 +14,7 @@ class Categorie extends Model
 
     public function create($nom)
     {
-        $sql = "INSERT INTO categorie (nom) VALUES (?)";
+        $sql = "INSERT INTO categorie (nomCategorie) VALUES (?)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$nom]);
     }
@@ -38,7 +38,7 @@ class Categorie extends Model
 
     public function update($id, $nom)
     {
-        $sql = "UPDATE categorie SET nom = ? WHERE id = ?";
+        $sql = "UPDATE categorie SET nomCategorie = ? WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$nom, $id]);
     }

@@ -43,8 +43,8 @@
                         <?php foreach ($ventes as $vente): ?>
                             <tr>
                                 <td class="py-3 px-4"><?php echo $vente['date']; ?></td>
-                                <td class="py-3 px-4"><?php echo $vente['articleVenteId']; ?></td>
-                                <td class="py-3 px-4"><?php echo $vente['clientId']; ?></td>
+                                <td class="py-3 px-4"><?php echo $vente['libelle']; ?></td>
+                                <td class="py-3 px-4"><?php echo $vente['nom']; ?></td>
                                 <td class="py-3 px-4"><?php echo $vente['qte']; ?></td>
                                 <td class="py-3 px-4"><?php echo $vente['prix']; ?></td>
                                 <td class="py-3 px-4"><?php echo $vente['montant']; ?></td>

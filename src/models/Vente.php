@@ -12,7 +12,8 @@ class Vente extends Model
         $this->ouvrirConnexion();
     }
 
-    public function create($date, $articleId, $clientId, $quantite, $prix, $montant, $observation) {
+    public function create($date, $articleId, $clientId, $quantite, $prix, $montant, $observation)
+    {
         $sql = "
             INSERT INTO ventes (date, articleVenteId, clientId, qte, prix, montant, observation)
             VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -31,7 +32,24 @@ class Vente extends Model
 
     public function getByDate($date)
     {
-        $sql = "SELECT * FROM ventes WHERE date = ?";
+        $sql = "SELECT 
+        ventes.id AS venteId,
+        ventes.date,
+        ventes.qte,
+        ventes.prix,
+        ventes.montant,
+        ventes.observation,
+        articleVente.libelle AS libelle,
+        clients.nom AS nom,
+        clients.prenom AS prenom
+    FROM 
+        ventes
+    JOIN 
+        articleVente ON ventes.articleVenteId = articleVente.id
+    JOIN 
+        clients ON ventes.clientId = clients.id
+    WHERE 
+        ventes.date = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$date]);
 
@@ -40,7 +58,24 @@ class Vente extends Model
 
     public function getByClient($clientId)
     {
-        $sql = "SELECT * FROM ventes WHERE clientId = ?";
+        $sql = "SELECT 
+        ventes.id AS venteId,
+        ventes.date,
+        ventes.qte,
+        ventes.prix,
+        ventes.montant,
+        ventes.observation,
+        articleVente.libelle AS libelle,
+        clients.nom AS nom,
+        clients.prenom AS prenom
+    FROM 
+        ventes
+    JOIN 
+        articleVente ON ventes.articleVenteId = articleVente.id
+    JOIN 
+        clients ON ventes.clientId = clients.id
+    WHERE 
+        ventes.clientId = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$clientId]);
 
@@ -49,7 +84,24 @@ class Vente extends Model
 
     public function getByArticle($articlId)
     {
-        $sql = "SELECT * FROM ventes WHERE articleVenteId = ?";
+        $sql = "SELECT 
+        ventes.id AS venteId,
+        ventes.date,
+        ventes.qte,
+        ventes.prix,
+        ventes.montant,
+        ventes.observation,
+        articleVente.libelle AS libelle,
+        clients.nom AS nom,
+        clients.prenom AS prenom
+    FROM 
+        ventes
+    JOIN 
+        articleVente ON ventes.articleVenteId = articleVente.id
+    JOIN 
+        clients ON ventes.clientId = clients.id
+    WHERE 
+        ventes.articleVenteId = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$articlId]);
 

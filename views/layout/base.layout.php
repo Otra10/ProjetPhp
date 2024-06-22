@@ -24,56 +24,51 @@
             <nav class="flex-grow">
                 <ul class="flex flex-col">
                     <li class="mb-2">
-                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="#">Accueil</a>
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Home">Accueil</a>
                     </li>
                     <li class="mb-2">
-                        <?php if($_SESSION["user"]["role"]=="gestionnaire" || ($_SESSION["user"]["role"]=="responsableStock")):?>
-                       
+                        <?php if ($_SESSION["user"]["role"] == "gestionnaire" || ($_SESSION["user"]["role"] == "responsableStock")) : ?>
+
                             <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=ArticleConfection">Articles de Confection</a>
                         <?php endif; ?>
                     </li>
                     <li class="mb-2">
-                    <?php if($_SESSION["user"]["role"]=="gestionnaire" || ($_SESSION["user"]["role"]=="tailleur")):?>
-                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=ArticleVente">Articles de Vente</a>
+                        <?php if ($_SESSION["user"]["role"] == "gestionnaire" || ($_SESSION["user"]["role"] == "responsableProduction")) : ?>
+                            <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=ArticleVente">Articles de Vente</a>
                         <?php endif; ?>
                     </li>
                     <li class="mb-2">
-                    <?php if($_SESSION["user"]["role"]=="gestionnaire"):?>
-                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Categorie">Catégories</a>
+                        <?php if ($_SESSION["user"]["role"] == "gestionnaire") : ?>
+                            <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Categorie">Catégories</a>
                         <?php endif; ?>
                     </li>
                     <li class="mb-2">
-                        <?php if($_SESSION["user"]["role"]=="gestionnaire" || ($_SESSION["user"]["role"]=="responsableStock")):?>
-                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Approvisionnement">Approvisionnement</a>
+                        <?php if ($_SESSION["user"]["role"] == "gestionnaire" || ($_SESSION["user"]["role"] == "responsableStock")) : ?>
+                            <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Approvisionnement">Approvisionnement</a>
                         <?php endif; ?>
                     </li>
                     <li class="mb-2">
-                        <?php if($_SESSION["user"]["role"]=="gestionnaire"):?>
-                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Fournisseur">Fournisseurs</a>
+                        <?php if ($_SESSION["user"]["role"] == "gestionnaire") : ?>
+                            <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Fournisseur">Fournisseurs</a>
                         <?php endif; ?>
                     </li>
                     <li class="mb-2">
-                        <?php if($_SESSION["user"]["role"]=="gestionnaire"):?>
-                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Client">Clients</a>
+                        <?php if ($_SESSION["user"]["role"] == "gestionnaire") : ?>
+                            <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Client">Clients</a>
                         <?php endif; ?>
                     </li>
                     <li class="mb-2">
-                        <?php if($_SESSION["user"]["role"]=="gestionnaire" || ($_SESSION["user"]["role"]=="vendeur")):?>
-                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Vente">Ventes</a>
+                        <?php if ($_SESSION["user"]["role"] == "gestionnaire" || ($_SESSION["user"]["role"] == "vendeur")) : ?>
+                            <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Vente">Ventes</a>
                         <?php endif; ?>
                     </li>
                     <li class="mb-2">
-                        <?php if($_SESSION["user"]["role"]=="gestionnaire"):?>
-                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Type">Types</a>
+                        <?php if ($_SESSION["user"]["role"] == "gestionnaire") : ?>
+                            <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="<?= webRoot ?>/?controller=Utilisateur&action=index">Utilisateurs</a>
                         <?php endif; ?>
                     </li>
                     <li class="mb-2">
-                        <?php if($_SESSION["user"]["role"]=="gestionnaire"):?>
-                        <a class="nav-link block py-2 px-4 hover:bg-gray-700" href="#">Contact</a>
-                        <?php endif; ?>
-                    </li>
-                    <li class="mb-2">
-                        <a class="nav-link block py-2 px-4 hover:bg-gray-700 " href="<?= webRoot ?>/?controller=Auth&id=logout">Deconnexion</a>
+                        <a class="nav-link block py-2 px-4 hover:bg-gray-700 " href="<?= webRoot ?>/?controller=Auth&action=logout">Deconnexion</a>
                     </li>
                 </ul>
             </nav>

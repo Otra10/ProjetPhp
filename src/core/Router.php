@@ -11,6 +11,7 @@ use App\Controllers\FournisseurController;
 use App\Controllers\VenteController;
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
+use App\Controllers\UtilisateurController;
 use TypeController;
 
 class Router
@@ -21,14 +22,14 @@ class Router
 
         $controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : 'Auth';
         $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'index';
+        $actionAuth = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'login';
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
         $contentView = '';
         if ($controller == "Auth") {
             $controllerInstance = new AuthController();
-
-            $controllerInstance->login();
+            $controllerInstance->{$actionAuth}();
         }
-        if ($_SESSION["user"]) {
+        if (isset($_SESSION["user"])) {
             if ($controller == "ArticleConfection") {
                 $controllerInstance = new ArticleConfectionController();
                 if ($id !== null) {
@@ -43,12 +44,25 @@ class Router
                 } else {
                     $contentView = $controllerInstance->{$action}();
                 }
-            }elseif ($controller == "Home") {
-                $controllerInstance = new HomeController();
-              
+            } elseif ($controller == "Categorie") {
+                $controllerInstance = new CategorieController();
+                if ($id !== null) {
+                    $contentView = $controllerInstance->{$action}($id);
+                } else {
                     $contentView = $controllerInstance->{$action}();
-            }
-              elseif ($controller == "Vente") {
+                }
+            } elseif ($controller == "Utilisateur") {
+                $controllerInstance = new UtilisateurController();
+                if ($id !== null) {
+                    $contentView = $controllerInstance->{$action}($id);
+                } else {
+                    $contentView = $controllerInstance->{$action}();
+                }
+            } elseif ($controller == "Home") {
+                $controllerInstance = new HomeController();
+
+                $contentView = $controllerInstance->{$action}();
+            } elseif ($controller == "Vente") {
                 $controllerInstance = new VenteController();
                 if ($id !== null) {
                     $contentView = $controllerInstance->{$action}($id);
@@ -84,8 +98,9 @@ class Router
                     $contentView = $controllerInstance->{$action}();
                 }
             }
-        }
+        } else {
 
-        require_once("../views/auth/login.php");
+            require_once("../views/auth/login.php");
+        }
     }
 }

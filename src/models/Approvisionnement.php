@@ -22,7 +22,7 @@ class Approvisionnement extends Model
 
     public function getAll()
     {
-        $sql = "SELECT * FROM approvisionnement";
+        $sql = "select * from `approvisionnement` a, articleConfection c, fournisseurs t where a.`fournisseurId` = t.id and a.articleConfectionId=c.id";;
         $stmt = $this->pdo->query($sql);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

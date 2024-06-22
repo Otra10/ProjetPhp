@@ -9,7 +9,6 @@ class AuthController
     public function login()
     {
         $utilisateur=new Utilisateur();
-   
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'];
             $password = $_POST['password'];
