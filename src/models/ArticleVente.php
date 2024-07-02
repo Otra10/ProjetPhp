@@ -19,7 +19,7 @@ class ArticleVente extends Model
             VALUES (?, ?, ?, ?, ?)
         ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$libelle, $prix, $qte, $montant, $photo]);
+$stmt->execute([$libelle, $prix, $qte, $montant, $photo]);
     }
 
     public function getAll()

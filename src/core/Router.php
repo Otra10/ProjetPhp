@@ -19,8 +19,8 @@ class Router
     public static function route()
     {
         session_start();
-
-        $controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : 'Auth';
+ 
+        $controller = isset($_REQUEST['controller'])? $_REQUEST['controller'] : 'Auth';
         $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'index';
         $actionAuth = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'login';
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;

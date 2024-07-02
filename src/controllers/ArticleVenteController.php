@@ -4,15 +4,23 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Model\ArticleConfection;
 use App\Model\ArticleVente;
+use App\Model\Vente;
 
 class ArticleVenteController extends Controller
 {
     public function index()
     {
         $model = new ArticleVente();
+        $modelVente= new Vente();
+        $ventes=$modelVente->getAll();
         $articles = $model->getAll();
-
-        $this->renderView('ArticleVente/liste', ['articles' => $articles]);
+        $montant=0;
+    
+        $this->renderView('ArticleVente/liste', [
+            'articles' => $articles,
+            'ventes' => $ventes,
+            'montant'=> $montant
+        ]);
     }
 
     public function create() {

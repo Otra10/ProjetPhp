@@ -62,7 +62,6 @@ class Utilisateur extends Model
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['count'];
     }
-
     public function authenticate($username, $password)
     {
         $sql = "SELECT * FROM utilisateurs WHERE username = ?";
