@@ -3,8 +3,8 @@
 namespace App\Model;
 
 use App\Core\Model;
-use InvalidArgumentException;
 use PDO;
+use PDOException;
 
 class Vente extends Model
 {
@@ -12,53 +12,61 @@ class Vente extends Model
     {
         $this->ouvrirConnexion();
     }
-
-    public function create($date, $clientId, $articles, $observation)
-    
-    {
-        
-        $this->pdo->beginTransaction();
+    public function create($date, $clientId, $articles, $observation) {
         try {
-            $sql = "
-                INSERT INTO Vente (date, clientId, observation)
-                VALUES (?, ?, ?)
-            ";
+            // Commence une transaction
+            $this->pdo->beginTransaction();
+
+            // Insertion de la vente
+            $sql = "INSERT INTO Vente (date, clientId, observation) VALUES (:date, :clientId, :observation)";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([$date, $clientId, $observation]);
-            $vente_id = $this->pdo->lastInsertId();
+            $stmt->execute([
+                'date' => $date,
+                'clientId' => $clientId,
+                'observation' => $observation
+            ]);
 
-            $totalMontant = 0;
-            foreach ($articles as $article) {
-                $article_id = $article['articleVenteId'];
-                $quantite = $article['qte'];
-                $prix = $article['prix'];
-                $montant = $quantite * $prix;
-                $totalMontant += $montant;
-
-                $sql = "
-                    INSERT INTO vente_articles (vente_id, articleVenteId, qte, prix, montant)
-                    VALUES (?, ?, ?, ?, ?)
-                ";
-                $stmt = $this->pdo->prepare($sql);
-                $stmt->execute([$vente_id, $article_id, $quantite, $prix, $montant]);
+            // Récupère l'ID de la vente nouvellement créée
+            $venteId = $this->pdo->lastInsertId();
+            if (!$venteId) {
+                throw new PDOException("Failed to retrieve vente ID after insertion.");
             }
 
-            // Update total amount in the ventes table
-            $sql = "
-                UPDATE Vente
-                SET montant = ?
-                WHERE id = ?
-            ";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([$totalMontant, $vente_id]);
+            // Log the venteId
+            error_log("Vente ID: " . $venteId);
 
+            // Insertion des articles de la vente
+            foreach ($articles as $article) {
+                error_log("Inserting article ID: " . $article['id'] . " with quantity: " . $article['quantite']);
+                $sql = "INSERT INTO vente_articles (vente_id, articleVenteId, qte) VALUES (:vente_id, :articleVenteId, :qte)";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([
+                    'vente_id' => $venteId,
+                    'articleVenteId' => $article['id'],
+                    'qte' => $article['quantite']
+                ]);
+
+                // Mise à jour du stock et du montant des ventes de l'article
+                $sql = "UPDATE articlevente SET 
+                            qte = qte - :qte,
+                            montant = montant + (:qte * prix)
+                        WHERE id = :articleVenteId";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([
+                    'qte' => $article['quantite'],
+                    'articleVenteId' => $article['id']
+                ]);
+            }
+
+            // Valide la transaction
             $this->pdo->commit();
-        } catch (\Exception $e) {
+        } catch (PDOException $e) {
+            // Annule la transaction en cas d'erreur
             $this->pdo->rollBack();
+            error_log("Error during vente creation: " . $e->getMessage());
             throw $e;
         }
     }
-
     public function getAll()
     {
         $sql = "SELECT 
@@ -66,16 +74,16 @@ class Vente extends Model
                     v.date,
                     v.observation,
                     SUM(va.qte) AS qte_totale,
-                    SUM(va.montant) AS montant_total,
+                    SUM(va.qte * a.prix) AS montant_total,
                     GROUP_CONCAT(a.libelle SEPARATOR ', ') AS articles,
                     c.nom,
                     c.prenom
                 FROM 
-                    Vente v
+                    vente v
                 JOIN 
                     vente_articles va ON v.id = va.vente_id
                 JOIN 
-                    articleVente a ON va.articleVenteId = a.id
+                    articlevente a ON va.articleVenteId = a.id
                 JOIN 
                     clients c ON v.clientId = c.id
                 GROUP BY 
@@ -92,16 +100,16 @@ class Vente extends Model
                     v.date,
                     v.observation,
                     SUM(va.qte) AS qte_totale,
-                    SUM(va.montant) AS montant_total,
+                    SUM(va.qte * a.prix) AS montant_total,
                     GROUP_CONCAT(a.libelle SEPARATOR ', ') AS articles,
                     c.nom,
                     c.prenom
                 FROM 
-                    Vente v
+                    vente v
                 JOIN 
                     vente_articles va ON v.id = va.vente_id
                 JOIN 
-                    articleVente a ON va.articleVenteId = a.id
+                    articlevente a ON va.articleVenteId = a.id
                 JOIN 
                     clients c ON v.clientId = c.id
                 WHERE 
@@ -121,16 +129,16 @@ class Vente extends Model
                     v.date,
                     v.observation,
                     SUM(va.qte) AS qte_totale,
-                    SUM(va.montant) AS montant_total,
+                    SUM(va.qte * a.prix) AS montant_total,
                     GROUP_CONCAT(a.libelle SEPARATOR ', ') AS articles,
                     c.nom,
                     c.prenom
                 FROM 
-                    Vente v
+                    vente v
                 JOIN 
                     vente_articles va ON v.id = va.vente_id
                 JOIN 
-                    articleVente a ON va.articleVenteId = a.id
+                    articlevente a ON va.articleVenteId = a.id
                 JOIN 
                     clients c ON v.clientId = c.id
                 WHERE 
@@ -150,16 +158,16 @@ class Vente extends Model
                     v.date,
                     v.observation,
                     SUM(va.qte) AS qte_totale,
-                    SUM(va.montant) AS montant_total,
+                    SUM(va.qte * a.prix) AS montant_total,
                     GROUP_CONCAT(a.libelle SEPARATOR ', ') AS articles,
                     c.nom,
                     c.prenom
                 FROM 
-                    Vente v
+                    vente v
                 JOIN 
                     vente_articles va ON v.id = va.vente_id
                 JOIN 
-                    articleVente a ON va.articleVenteId = a.id
+                    articlevente a ON va.articleVenteId = a.id
                 JOIN 
                     clients c ON v.clientId = c.id
                 WHERE 
@@ -171,4 +179,29 @@ class Vente extends Model
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

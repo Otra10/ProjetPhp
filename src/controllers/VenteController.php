@@ -5,107 +5,56 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Model\ArticleVente;
 use App\Model\Client;
+use App\Model\Panier;
 use App\Model\Vente;
 
 class VenteController extends Controller
 {
-    public function index()
-    {
-        $articleModel = new ArticleVente();
-        $clientModel = new Client();
+    private $panier;
+
+    public function __construct() {
+        $this->panier = new Panier();
+    }
+
+    public function index() {
         $venteModel = new Vente();
-        $articles = $articleModel->getAll();
-        $clients = $clientModel->getAll();
         $ventes = $venteModel->getAll();
-        var_dump($ventes);
-        $this->renderView("Vente/liste", [
-            "ventes" => $ventes,
-            "articles" => $articles,
-            "clients" => $clients,
+
+        $this->renderView('Vente/liste', [
+            'ventes' => $ventes
         ]);
     }
 
-    public function create()
-    {
+    public function create() {
         $articleModel = new ArticleVente();
         $clientModel = new Client();
         $articles = $articleModel->getAll();
         $clients = $clientModel->getAll();
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $date = $_POST['date'];
-            $clientId = $_POST['clientId'];
-            $articles = $_POST['articleVenteId'];
-            $observation = $_POST['observation'];
-            var_dump($articles);
-            $venteModel = new Vente();
-            $venteModel->create($date, $clientId, $articles, $observation);
-            
-            // header('location:' . webRoot . '/?controller=Vente');
-        } else {
-            $this->renderView("Vente/create", [
-                "articles" => $articles,
-                "clients" => $clients
-            ]);
-        }
+
+        $this->renderView('Vente/create', [
+            'articles' => $articles,
+            'clients' => $clients
+        ]);
     }
 
-    public function filterByDate()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $date = $_POST['date'];
-
-            $venteModel = new Vente();
-            $ventes = $venteModel->getByDate($date);
-
-            $articleModel = new ArticleVente();
-            $clientModel = new Client();
-            $articles = $articleModel->getAll();
-            $clients = $clientModel->getAll();
-            $this->renderView("Vente/liste", [
-                "ventes" => $ventes,
-                "articles" => $articles,
-                "clients" => $clients,
-            ]);
-        }
+    public function ajouterAuPanier($articleId, $quantite) {
+        $this->panier->ajouterArticle($articleId, $quantite);
+        header('location:'.webRoot.'/?controller=Vente');
     }
 
-    public function filterByClient()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $clientId = $_POST['clientId'];
-
-            $venteModel = new Vente();
-            $ventes = $venteModel->getByClient($clientId);
-
-            $articleModel = new ArticleVente();
-            $clientModel = new Client();
-            $articles = $articleModel->getAll();
-            $clients = $clientModel->getAll();
-            $this->renderView("Vente/liste", [
-                "ventes" => $ventes,
-                "articles" => $articles,
-                "clients" => $clients,
-            ]);
-        }
+    public function retirerDuPanier($articleId) {
+        $this->panier->retirerArticle($articleId);
+        header('location:'.webRoot.'/?controller=Vente');
     }
 
-    public function filterByArticle()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $articleId = $_POST['articleId'];
+    public function store() {
+        $clientId = $_POST['clientId'];
+        $observation = $_POST['observation'];
+        $articles = $_POST['articles'];
 
-            $venteModel = new Vente();
-            $ventes = $venteModel->getByArticle($articleId);
-
-            $articleModel = new ArticleVente();
-            $clientModel = new Client();
-            $articles = $articleModel->getAll();
-            $clients = $clientModel->getAll();
-            $this->renderView("Vente/liste", [
-                "ventes" => $ventes,
-                "articles" => $articles,
-                "clients" => $clients,
-            ]);
-        }
+        $venteModel = new Vente();
+        $venteModel->create(date('Y-m-d'), $clientId, $articles, $observation);
+        $this->panier->viderPanier();
+        header('location:'.webRoot.'/?controller=Vente');
     }
 }

@@ -22,14 +22,33 @@ class Approvisionnement extends Model
 
     public function getAll()
     {
-        $sql = "select * from `approvisionnement` a, articleConfection c, fournisseurs t where a.`fournisseurId` = t.id and a.articleConfectionId=c.id";;
+        $sql = "SELECT a.*, c.libelle, t.nom FROM `approvisionnement` a
+                JOIN articleConfection c ON a.articleConfectionId = c.id
+                JOIN fournisseurs t ON a.fournisseurId = t.id";
         $stmt = $this->pdo->query($sql);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function search($criteria)
+    public function getById($id)
     {
-        // Implémenter la logique de recherche ici
+        $sql = "SELECT * FROM `approvisionnement` WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function update($id, $date, $article_id, $fournisseur_id, $quantite, $prix, $montant, $observation) {
+        $sql = "UPDATE approvisionnement SET date = ?, articleConfectionId = ?, fournisseurId = ?, qte = ?, prix = ?, montant = ?, observation = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$date, $article_id, $fournisseur_id, $quantite, $prix, $montant, $observation, $id]);
+    }
+
+    public function delete($id)
+    {
+        $sql = "DELETE FROM `approvisionnement` WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
     }
 }

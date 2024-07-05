@@ -20,15 +20,8 @@
                     <td class="w-1/6 py-3 px-4"><?php echo $article['libelle']; ?></td>
                     <td class="w-1/6 py-3 px-4"><?php echo $article['prix']; ?></td>
                     <td class="w-1/6 py-3 px-4"><?php echo $article['qte']; ?></td>
+                    <td class="w-1/6 py-3 px-4"><?php echo $article['montant']; ?></td>
 
-                    <?php foreach ($ventes as $vente) : ?>
-                        <?php if ($article["libelle"] == $vente["libelle"]) : ?>
-                            <?php $montant+= $vente['montant']; ?>
-                            
-                        <?php endif; ?>
-
-                    <?php endforeach; ?>
-                    <td class="w-1/6 py-3 px-4"> <?php echo $montant; ?></td>
 
                     <td class="w-1/6 py-3 px-4"><img src="<?php echo $article['photo']; ?>" alt="Photo de <?php echo $article['libelle']; ?>" class="h-12 w-12 rounded-full"></td>
                     <?php if ($_SESSION["user"]["role"] == "gestionnaire") : ?>

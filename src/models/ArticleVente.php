@@ -56,4 +56,14 @@ $stmt->execute([$libelle, $prix, $qte, $montant, $photo]);
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
     }
+    public function updateStock($articleId, $quantite)
+    {
+        $sql = "
+            UPDATE articlevente
+            SET qte = qte - ?
+            WHERE id = ?
+        ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$quantite, $articleId]);
+    }
 }
